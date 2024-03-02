@@ -1,5 +1,5 @@
-import { signIn } from "next-auth/react";
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { trpc } from "../../../utils/trpc";
 
 export const SignUpMenu: React.FC = () => {
@@ -7,7 +7,7 @@ export const SignUpMenu: React.FC = () => {
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const mutation = trpc.auth.register.useMutation();
-
+  const router = useRouter();
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
@@ -19,9 +19,13 @@ export const SignUpMenu: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     mutation.mutate({ email, password });
-    signIn("credentials", { email, password });
   };
 
+  useEffect(() => {
+    if (mutation.isSuccess === true) {
+      router.push("./emaillogin");
+    }
+  }, [mutation.isSuccess, router]);
   return (
     <div className="flex h-[100vh] flex-col items-center justify-center">
       <h2 className="mb-2 text-xl font-bold">Sign Up</h2>
