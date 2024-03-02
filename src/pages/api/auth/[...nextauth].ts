@@ -1,13 +1,12 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-// Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 import { env } from "../../../env/server.mjs";
 import { prisma } from "../../../server/db/client";
 
 export const authOptions: NextAuthOptions = {
-  // Include user.id on session
   callbacks: {
     session({ session, user }) {
       if (session.user) {
@@ -19,7 +18,6 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
@@ -29,12 +27,37 @@ export const authOptions: NextAuthOptions = {
         timeout: 10000,
       },
     }),
+    CredentialsProvider({
+      name: "E-mail Registration",
+      credentials: {
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "Insert your email",
+        },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials, req) {
+        const { email, password } = credentials;
+        const user = await prisma.user.findUnique({
+          where: { email: email },
+        });
 
-    
+        if (!user) {
+          throw new Error("No user found with the email");
+        }
 
+        const isValid = await bcrypt.compare(password, user.password);
+        if (!isValid) {
+          throw new Error("Password is incorrect");
+        }
+
+        // Return user object if valid, which sets the user session
+        return { id: user.id, name: user.name, email: user.email };
+      },
+    }),
 
     // ...add more providers here
-
   ],
 };
 
