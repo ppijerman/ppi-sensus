@@ -5,7 +5,7 @@ import { z } from "zod";
 import { prisma } from "../../db/client";
 import { t } from "../trpc";
 
-const authRouter = t.router({
+export const authRouter = t.router({
   register: t.procedure
     .input(
       z.object({
@@ -45,5 +45,3 @@ const authRouter = t.router({
     }),
   // Add other authentication procedures (e.g., login, logout) here
 });
-
-export default authRouter;

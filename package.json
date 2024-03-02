@@ -27,6 +27,7 @@
     "@trpc/react-query": "^10.44.1",
     "@trpc/server": "^10.44.1",
     "@types/pg": "^8.11.2",
+    "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "evergreen-ui": "^7.1.9",
     "mysql2": "^3.9.2",

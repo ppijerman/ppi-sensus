@@ -1,13 +1,18 @@
-import NextAuth, { type NextAuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-// Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import NextAuth, { type NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
+import bcrypt from "bcrypt";
 import { env } from "../../../env/server.mjs";
 import { prisma } from "../../../server/db/client";
 
+interface Credentials {
+  email: string;
+  password: string;
+}
+
 export const authOptions: NextAuthOptions = {
-  // Include user.id on session
   callbacks: {
     session({ session, user }) {
       if (session.user) {
@@ -19,7 +24,6 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
@@ -29,12 +33,47 @@ export const authOptions: NextAuthOptions = {
         timeout: 10000,
       },
     }),
+    CredentialsProvider({
+      name: "E-mail Registration",
+      credentials: {
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "Insert your email",
+        },
+        password: { label: "Password", type: "password" },
+      },
+      authorize: async (credentials?: Credentials) => {
+        console.log("I am called!!!");
+        if (!credentials) throw new Error("Credentials not found");
+        const { email, password } = credentials;
+        const user = await prisma.user.findUnique({
+          where: { email },
+        });
 
-    
+        if (!user) {
+          throw new Error("No user found with the email");
+        }
 
+        const isValid = await bcrypt.compare(password, user.password || "");
+        if (!isValid) {
+          throw new Error("Password is incorrect");
+        }
+
+        const verification =
+          user.verification === "REJECTED" ? "UNVERIFIED" : user.verification;
+        // Return user object if valid, which sets the user session
+        return {
+          id: user.id,
+          email: user.email,
+          role: user.role,
+          status: user.status,
+          verification,
+        };
+      },
+    }),
 
     // ...add more providers here
-
   ],
 };
 
