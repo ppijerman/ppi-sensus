@@ -1,9 +1,10 @@
 // pages/signin.js
 
-import Head from "next/head";
-import { Card, Footer } from "../../../Components";
 import { signIn } from "next-auth/react";
+import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import { Card, Footer } from "../../../Components";
 import GoogleButton from "./GoogleSignInButton";
 
 export const SignInOptionsPage = () => {
@@ -37,6 +38,9 @@ export const SignInOptionsPage = () => {
                 </button>
               </div>
               <div className="mt-4">
+                <SignUpByEmail />
+              </div>
+              <div className="mt-4">
                 <GoogleButton />
               </div>
             </div>
@@ -47,3 +51,11 @@ export const SignInOptionsPage = () => {
     </>
   );
 };
+
+const SignUpByEmail: React.FC = () => (
+  <Link href="./signup">
+    <button className="flex w-full cursor-pointer justify-center rounded-lg rounded-md border border-transparent bg-pink-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+      Sign Up By Email
+    </button>
+  </Link>
+);
