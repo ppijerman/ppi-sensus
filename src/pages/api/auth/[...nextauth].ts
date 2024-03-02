@@ -3,8 +3,14 @@ import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+import bcrypt from "bcrypt";
 import { env } from "../../../env/server.mjs";
 import { prisma } from "../../../server/db/client";
+
+interface Credentials {
+  email: string;
+  password: string;
+}
 
 export const authOptions: NextAuthOptions = {
   callbacks: {
@@ -37,23 +43,23 @@ export const authOptions: NextAuthOptions = {
         },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
+      authorize: async (credentials: Credentials) => {
         const { email, password } = credentials;
         const user = await prisma.user.findUnique({
-          where: { email: email },
+          where: { email },
         });
 
         if (!user) {
           throw new Error("No user found with the email");
         }
 
-        const isValid = await bcrypt.compare(password, user.password);
+        const isValid = await bcrypt.compare(password, user.password || '');
         if (!isValid) {
           throw new Error("Password is incorrect");
         }
 
         // Return user object if valid, which sets the user session
-        return { id: user.id, name: user.name, email: user.email };
+        return { id: user.id, email: user.email };
       },
     }),
 
