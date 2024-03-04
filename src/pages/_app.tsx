@@ -4,6 +4,7 @@ import { SessionProvider } from "next-auth/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { trpc } from "../utils/trpc";
 import Script from "next/script";
+import { Background } from "../Components/Background";
 
 import "../styles/globals.css";
 import { toaster } from "evergreen-ui";
@@ -27,6 +28,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         src="https://plausible.dlx.pw/js/plausible.js"
       />
       <ReactQueryDevtools initialIsOpen={false} />
+      <Background />
       <Component {...pageProps} />
     </SessionProvider>
   );

@@ -1,5 +1,6 @@
 // src/server/routers/authRouter.ts
 import { TRPCError } from "@trpc/server";
+import { getUser } from "./user/getUser";
 import bcrypt from "bcrypt";
 import { z } from "zod";
 import { prisma } from "../../db/client";
@@ -18,7 +19,7 @@ export const authRouter = t.router({
     )
     .mutation(async ({ input }) => {
       const { email, password, occupation, location, affiliation } = input;
-      const existingUser = await prisma.user.findUnique({ where: { email } });
+      const existingUser = await prisma.user.findUniqueOrThrow({ where: { email } });
 
       if (existingUser) {
         throw new TRPCError({
