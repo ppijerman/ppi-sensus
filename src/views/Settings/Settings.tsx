@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import type { NextPage } from "next";
 import { Base, Protected } from "../../Components";
@@ -31,18 +31,29 @@ const ToggleSwitch: React.FC<{
 );
 
 export const Settings: NextPage = () => {
-  const { data: user, isLoading: isLoadingUser } = trpc.user.getUser.useQuery();
+  const {
+    data: user,
+    isLoading: isLoadingUser,
+    refetch,
+  } = trpc.user.getUser.useQuery();
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isLoadingUpdate, setIsLoadingUpdate] = useState(false);
 
-  const [agreedToTermsAndCond, setAgreedToTermsAndCond] = useState<boolean>(
-    user?.agreedToTermsAndCond ?? true,
-  );
-  const [forwardDataThirdParty, setForwardDataThirdParty] = useState<boolean>(
-    user?.forwardDataThirdParty ?? false,
-  );
+  // State hooks for settings
+  const [agreedToTermsAndCond, setAgreedToTermsAndCond] =
+    useState<boolean>(false);
+  const [forwardDataThirdParty, setForwardDataThirdParty] =
+    useState<boolean>(false);
   const [subscribeNewsletterEmail, setSubscribeNewsletterEmail] =
-    useState<boolean>(user?.subscribeNewsletterEmail ?? false);
+    useState<boolean>(false);
+
+  useEffect(() => {
+    if (user) {
+      setAgreedToTermsAndCond(user.agreedToTermsAndCond);
+      setForwardDataThirdParty(user.forwardDataThirdParty);
+      setSubscribeNewsletterEmail(user.subscribeNewsletterEmail);
+    }
+  }, [user]);
 
   const updateConsentMutation = trpc.user.updateConsent.useMutation();
   const deleteUserMutation = trpc.user.deleteUserById.useMutation();
@@ -60,6 +71,7 @@ export const Settings: NextPage = () => {
       {
         onSuccess: () => {
           toaster.success("Settings updated successfully!");
+          refetch();
           setIsLoadingUpdate(false);
         },
         onError: (error) => {
@@ -71,16 +83,15 @@ export const Settings: NextPage = () => {
     );
   };
 
-  const handleDeleteAccount = async (userId: string) => {
-    setIsDeleteDialogOpen(false); // Close the confirmation dialog
-    await deleteUserMutation.mutateAsync(
-      { userId },
+  if (isLoadingUser) return <Spinner />;
+
+  function handleDeleteAccount(id: string): void {
+    deleteUserMutation.mutateAsync(
+      { userId: id },
       {
         onSuccess: () => {
-          localStorage.removeItem("token");
-          toaster.notify("Account deleted successfully.");
-          // Redirect to login page
-          window.location.href = "/";
+          toaster.success("Account deleted successfully!");
+          window.location.href = "/"; // Redirect to homepage
         },
         onError: (error) => {
           console.error("Failed to delete account:", error);
@@ -88,10 +99,7 @@ export const Settings: NextPage = () => {
         },
       },
     );
-  };
-
-  if (isLoadingUser) return <Spinner />;
-
+  }
   return (
     <>
       <Head>
@@ -164,10 +172,9 @@ export const Settings: NextPage = () => {
         title="Delete Account"
         intent="danger"
         onCloseComplete={() => setIsDeleteDialogOpen(false)}
-        onConfirm={() => user && handleDeleteAccount(user.id)} // checking is user is defined before calling
+        onConfirm={() => user && handleDeleteAccount(user.id)}
         confirmLabel="Delete Forever"
         cancelLabel="Cancel"
-        //position={Position.BOTTOM}
       >
         Deleting your account is irreversible. You will lose all your data. Are
         you sure?
