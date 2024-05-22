@@ -1,9 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import type { NextPage } from "next";
-import { Base, Card, Protected } from "../../Components";
+import { Base, Protected } from "../../Components";
 import { trpc } from "../../utils/trpc";
-import { Button, Spinner, Pane, toaster, Switch, Dialog } from "evergreen-ui";
+import {
+  Button,
+  Spinner,
+  Pane,
+  majorScale,
+  toaster,
+  Switch,
+  Dialog,
+} from "evergreen-ui";
 
 const ToggleSwitch: React.FC<{
   label: string;
@@ -23,29 +31,18 @@ const ToggleSwitch: React.FC<{
 );
 
 export const Settings: NextPage = () => {
-  const {
-    data: user,
-    isLoading: isLoadingUser,
-    refetch,
-  } = trpc.user.getUser.useQuery();
+  const { data: user, isLoading: isLoadingUser } = trpc.user.getUser.useQuery();
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isLoadingUpdate, setIsLoadingUpdate] = useState(false);
 
-  // State hooks for settings
-  const [agreedToTermsAndCond, setAgreedToTermsAndCond] =
-    useState<boolean>(false);
-  const [forwardDataThirdParty, setForwardDataThirdParty] =
-    useState<boolean>(false);
+  const [agreedToTermsAndCond, setAgreedToTermsAndCond] = useState<boolean>(
+    user?.agreedToTermsAndCond ?? true,
+  );
+  const [forwardDataThirdParty, setForwardDataThirdParty] = useState<boolean>(
+    user?.forwardDataThirdParty ?? false,
+  );
   const [subscribeNewsletterEmail, setSubscribeNewsletterEmail] =
-    useState<boolean>(false);
-
-  useEffect(() => {
-    if (user) {
-      setAgreedToTermsAndCond(user.agreedToTermsAndCond);
-      setForwardDataThirdParty(user.forwardDataThirdParty);
-      setSubscribeNewsletterEmail(user.subscribeNewsletterEmail);
-    }
-  }, [user]);
+    useState<boolean>(user?.subscribeNewsletterEmail ?? false);
 
   const updateConsentMutation = trpc.user.updateConsent.useMutation();
   const deleteUserMutation = trpc.user.deleteUserById.useMutation();
@@ -63,7 +60,6 @@ export const Settings: NextPage = () => {
       {
         onSuccess: () => {
           toaster.success("Settings updated successfully!");
-          refetch();
           setIsLoadingUpdate(false);
         },
         onError: (error) => {
@@ -75,15 +71,16 @@ export const Settings: NextPage = () => {
     );
   };
 
-  if (isLoadingUser) return <Spinner />;
-
-  function handleDeleteAccount(id: string): void {
-    deleteUserMutation.mutateAsync(
-      { userId: id },
+  const handleDeleteAccount = async (userId: string) => {
+    setIsDeleteDialogOpen(false); // Close the confirmation dialog
+    await deleteUserMutation.mutateAsync(
+      { userId },
       {
         onSuccess: () => {
-          toaster.success("Account deleted successfully!");
-          window.location.href = "/"; // Redirect to homepage
+          localStorage.removeItem("token");
+          toaster.notify("Account deleted successfully.");
+          // Redirect to login page
+          window.location.href = "/";
         },
         onError: (error) => {
           console.error("Failed to delete account:", error);
@@ -91,7 +88,9 @@ export const Settings: NextPage = () => {
         },
       },
     );
-  }
+  };
+
+  if (isLoadingUser) return <Spinner />;
 
   return (
     <>
@@ -101,9 +100,22 @@ export const Settings: NextPage = () => {
       </Head>
       <Base title="Settings">
         <Protected redirectTo="/">
-          <div className="py-4">
-            {!isLoadingUser && user && (
-              <Card className="max-w-[600px]">
+          {!isLoadingUser && user && (
+            <div
+              className="settings-container"
+              style={{
+                maxWidth: "800px",
+                marginLeft: "0",
+                marginRight: "auto",
+                padding: "20px",
+              }}
+            >
+              <Pane
+                padding={majorScale(3)}
+                background="#F1F2F6"
+                borderRadius={8}
+                elevation={1}
+              >
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <ToggleSwitch
                     label="I agree to the Terms and Conditions"
@@ -123,17 +135,15 @@ export const Settings: NextPage = () => {
                       setSubscribeNewsletterEmail(e.target.checked)
                     }
                   />
-                  <div className="pt-1">
-                    <Button
-                      appearance="primary"
-                      intent="success"
-                      type="submit"
-                      className="mt-5 w-full p-4 md:w-1/3"
-                      isLoading={isLoadingUpdate}
-                    >
-                      Update Settings
-                    </Button>
-                  </div>
+                  <Button
+                    appearance="primary"
+                    intent="success"
+                    type="submit"
+                    className="mt-5 w-full p-4 md:w-1/3"
+                    isLoading={isLoadingUpdate}
+                  >
+                    Update Settings
+                  </Button>
                 </form>
                 <Button
                   appearance="secondary"
@@ -144,9 +154,9 @@ export const Settings: NextPage = () => {
                 >
                   Delete Account
                 </Button>
-              </Card>
-            )}
-          </div>
+              </Pane>
+            </div>
+          )}
         </Protected>
       </Base>
       <Dialog
@@ -154,9 +164,10 @@ export const Settings: NextPage = () => {
         title="Delete Account"
         intent="danger"
         onCloseComplete={() => setIsDeleteDialogOpen(false)}
-        onConfirm={() => user && handleDeleteAccount(user.id)}
+        onConfirm={() => user && handleDeleteAccount(user.id)} // checking if user is defined before calling
         confirmLabel="Delete Forever"
         cancelLabel="Cancel"
+        //position={Position.BOTTOM}
       >
         Deleting your account is irreversible. You will lose all your data. Are
         you sure?

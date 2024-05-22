@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import type { NextPage } from "next";
-import { Base, Card, Protected } from "../../Components";
+import { Base, Protected } from "../../Components";
 import { trpc } from "../../utils/trpc";
-import { Button, Spinner, Pane, toaster, Switch, Dialog } from "evergreen-ui";
+import {
+  Button,
+  Spinner,
+  Pane,
+  majorScale,
+  toaster,
+  Switch,
+  Dialog,
+} from "evergreen-ui";
 
 const ToggleSwitch: React.FC<{
   label: string;
@@ -63,7 +71,7 @@ export const Settings: NextPage = () => {
       {
         onSuccess: () => {
           toaster.success("Settings updated successfully!");
-          refetch();
+          refetch(); // Refetch user data to ensure UI is in sync with the backend
           setIsLoadingUpdate(false);
         },
         onError: (error) => {
@@ -83,16 +91,16 @@ export const Settings: NextPage = () => {
       {
         onSuccess: () => {
           toaster.success("Account deleted successfully!");
-          window.location.href = "/"; // Redirect to homepage
+          // Perform any additional actions after successful deletion
         },
         onError: (error) => {
           console.error("Failed to delete account:", error);
           toaster.danger("Failed to delete account. Please try again.");
+          // Perform any additional actions after failed deletion
         },
       },
     );
   }
-
   return (
     <>
       <Head>
@@ -101,9 +109,22 @@ export const Settings: NextPage = () => {
       </Head>
       <Base title="Settings">
         <Protected redirectTo="/">
-          <div className="py-4">
-            {!isLoadingUser && user && (
-              <Card className="max-w-[600px]">
+          {!isLoadingUser && user && (
+            <div
+              className="settings-container"
+              style={{
+                maxWidth: "800px",
+                marginLeft: "0",
+                marginRight: "auto",
+                padding: "20px",
+              }}
+            >
+              <Pane
+                padding={majorScale(3)}
+                background="#F1F2F6"
+                borderRadius={8}
+                elevation={1}
+              >
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <ToggleSwitch
                     label="I agree to the Terms and Conditions"
@@ -123,17 +144,15 @@ export const Settings: NextPage = () => {
                       setSubscribeNewsletterEmail(e.target.checked)
                     }
                   />
-                  <div className="pt-1">
-                    <Button
-                      appearance="primary"
-                      intent="success"
-                      type="submit"
-                      className="mt-5 w-full p-4 md:w-1/3"
-                      isLoading={isLoadingUpdate}
-                    >
-                      Update Settings
-                    </Button>
-                  </div>
+                  <Button
+                    appearance="primary"
+                    intent="success"
+                    type="submit"
+                    className="mt-5 w-full p-4 md:w-1/3"
+                    isLoading={isLoadingUpdate}
+                  >
+                    Update Settings
+                  </Button>
                 </form>
                 <Button
                   appearance="secondary"
@@ -144,9 +163,9 @@ export const Settings: NextPage = () => {
                 >
                   Delete Account
                 </Button>
-              </Card>
-            )}
-          </div>
+              </Pane>
+            </div>
+          )}
         </Protected>
       </Base>
       <Dialog

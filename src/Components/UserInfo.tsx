@@ -1,5 +1,6 @@
 import { capitalize } from "../utils/capitalize";
 import type { RouterOutputs } from "../utils/trpc";
+import { CustomBadge } from "./CustomBadge";
 
 type UserInfoProps = {
   user: RouterOutputs["user"]["getUser"];
@@ -7,39 +8,47 @@ type UserInfoProps = {
 
 export const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
   const userInfo = [
-    { label: "Email", value: user.email },
-    { label: "Role", value: capitalize(user.role) },
-    { label: "Status", value: capitalize(user.status) },
+    { label: "E-mail", value: user.email },
+    { label: "Jenis Kelamin", value: capitalize(user.gender ?? "Unspecified") },
     {
       label: "Verified",
       value: user.verification === "VERIFIED" ? "Yes" : "No",
     },
     {
-      label: "Birth date",
+      label: "Tanggal Lahir",
       value: user.birthDate?.toLocaleDateString() ?? "N/A",
     },
-    { label: "Occupation", value: capitalize(user.occupation ?? "N/A") },
+    { label: "Status Pendidikan", value: capitalize(user.occupation ?? "N/A") },
     {
-      label: "Field of Study",
+      label: "Bidang Studi",
       value: capitalize(user.fieldOfStudy ?? "N/A"),
     },
     {
-      label: "Study Specialization",
+      label: "Spesialisasi Studi",
       value: user.studySpecialization ?? "N/A",
     },
     {
-      label: "Expected Graduation",
+      label: "Perkiraan Lulus",
       value: user.expectedGraduation?.toLocaleDateString() ?? "N/A",
     },
-    { label: "Bundesland", value: capitalize(user.bundesland ?? "N/A") },
-    { label: "Location", value: capitalize(user.location ?? "N/A") },
+    { label: "Afiliasi", value: user.affiliation.join(", ") ?? "N/A" },
+    { label: "Jalan, Nomor Rumah", value: capitalize(user.address ?? "N/A") },
+    { label: "Kode Pos", value: user.zipCode ?? "N/A" },
+    { label: "Kota", value: capitalize(user.location ?? "N/A") },
+    { label: "Negara Bagian", value: capitalize(user.bundesland ?? "N/A") },
     { label: "PPI Cabang", value: user.ppicabang ?? "N/A" },
   ];
   return (
     <>
       <div className="flex w-full flex-col gap-2">
         <h2 className="mb-4 text-2xl font-semibold">{user.name}</h2>
-
+        <div>
+          {user.role === "ADMIN" ? (
+            <CustomBadge color="neutral" className="text-white">Admin</CustomBadge>
+          ) : (
+            <CustomBadge color="blue">User</CustomBadge>
+          )}
+        </div>
         {userInfo.map(({ label, value }) => (
           <div key={label}>
             <span className="font-bold">{label}: </span>

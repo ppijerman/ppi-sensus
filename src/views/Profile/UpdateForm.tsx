@@ -16,9 +16,12 @@ export const UpdateProfileForm: React.FC<{
   const [birthDate, setBirthDate] = useState(
     user?.birthDate ? (user?.birthDate).toISOString().slice(0, 10) : "",
   );
+  const [gender, setGender] = useState(user?.gender ?? "");
   const [ppicabang, setPpiCabang] = useState(user?.ppicabang ?? "");
   const [occupation, setOccupation] = useState(user?.occupation ?? "");
   const [fieldOfStudy, setFieldOfStudy] = useState(user?.fieldOfStudy ?? "");
+  const [address, setAddress] = useState(user?.address ?? "");
+  const [zipCode, setZipCode] = useState(user?.zipCode ?? "");
   const [location, setLocation] = useState(user?.location ?? "");
   const [expectedGraduation, setExpectedGraduation] = useState(
     user.expectedGraduation
@@ -165,6 +168,18 @@ export const UpdateProfileForm: React.FC<{
       </div>
 
       <SelectField
+        label="Jenis Kelamin"
+        value={gender}
+        disabled={isLoading}
+        required={isProfileUpdated}
+        onChange={(e) => setGender(e.target.value)}
+      >
+        <option value="">Pilih Jenis Kelamin</option>
+        <option value="Laki-Laki">Laki-Laki</option>
+        <option value="Perempuan">Perempuan</option>
+      </SelectField>
+
+      <SelectField
         label="Status Pendidikan Saat Ini"
         description="Jika anda masih dalam proses pendidikan, pilih status pendidikan saat ini."
         value={occupation}
@@ -233,6 +248,34 @@ export const UpdateProfileForm: React.FC<{
           }
         />
       )}
+
+      <div className="flex w-full flex-col gap-5 md:flex-row">
+        <TextInputField
+          label="Alamat (Jalan, Nomor Rumah)"
+          description="Alamat tempat tinggal di Jerman"
+          placeholder="Braunschweigerstraße 53"
+          required={isProfileUpdated}
+          disabled={isLoading}
+          value={address}
+          width="100%"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setAddress(e.target.value)
+          }
+        />
+
+        <TextInputField
+          label="Kode Pos"
+          description="Kode Pos tempat tinggal di Jerman"
+          placeholder="38106"
+          required={isProfileUpdated}
+          disabled={isLoading}
+          value={zipCode}
+          width="100%"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setZipCode(e.target.value)
+          }
+        />
+      </div>
 
       <div className="flex flex-col gap-5 md:flex-row">
         <Autocomplete

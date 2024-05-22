@@ -521,10 +521,10 @@ export const Universities = [
   },
   {
     alpha_two_code: "DE",
-    web_pages: ["http://www.fh-kl.de/"],
+    web_pages: ["http://www.hs-kl.de/"],
     "state-province": null,
-    name: "Fachhochschule Kaiserslautern",
-    domains: ["fh-kl.de"],
+    name: "Hochschule Kaiserslautern",
+    domains: ["hs-kl.de"],
     country: "Germany",
   },
   {
@@ -857,10 +857,10 @@ export const Universities = [
   },
   {
     alpha_two_code: "DE",
-    web_pages: ["http://www.fh-trier.de/"],
+    web_pages: ["http://www.hochschule-trier.de/"],
     "state-province": null,
     name: "Fachhochschule Trier, Hochschule f\u00fcr Technik, Wirtschaft und Gestaltung",
-    domains: ["fh-trier.de"],
+    domains: ["hochschule-trier.de"],
     country: "Germany",
   },
   {
@@ -2003,10 +2003,10 @@ export const Universities = [
   },
   {
     alpha_two_code: "DE",
-    web_pages: ["http://www.uni-kl.de/"],
+    web_pages: ["http://www.rptu.de/"],
     "state-province": null,
     name: "Universit\u00e4t Kaiserslautern",
-    domains: ["uni-kl.de"],
+    domains: ["rptu.de"],
     country: "Germany",
   },
   {

@@ -4,10 +4,13 @@ import { protectedProcedure } from "../../trpc";
 export const updateUser = protectedProcedure
   .input(
     z.object({
-      name: z.string(),
+      name: z.string().optional(),
+      address: z.string().optional(),
+      zipCode: z.string().optional(),
+      gender: z.string().optional(),
       birthDate: z.date().optional(),
-      occupation: z.string(),
-      location: z.string(),
+      occupation: z.string().optional(),
+      location: z.string().optional(),
       ppicabang: z.string().optional(),
       fieldOfStudy: z.string().optional(),
       expectedGraduation: z.date().optional(),
@@ -21,6 +24,9 @@ export const updateUser = protectedProcedure
       ctx,
       input: {
         name,
+        address,
+        zipCode,
+        gender,
         birthDate,
         occupation,
         location,
@@ -40,6 +46,9 @@ export const updateUser = protectedProcedure
         },
         data: {
           name,
+          address,
+          zipCode,
+          gender,
           birthDate,
           occupation,
           location,

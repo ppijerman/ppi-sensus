@@ -14,6 +14,25 @@ export const generateAndSendVerificationToken = protectedProcedure
     }),
   )
   .mutation(async ({ ctx, input: { id, email } }) => {
+    const now = new Date();
+    const existingToken =
+      await ctx.prisma.universityEmailVerificationToken.findFirst({
+        where: { OR: [{ email: email }, { userId: id }] },
+      });
+
+    if (existingToken) {
+      const lastSentAt = new Date(existingToken.lastSentAt);
+      const timeSinceLastSent = (now.getTime() - lastSentAt.getTime()) / 1000; // seconds
+
+      if (timeSinceLastSent < 60) {
+        return {
+          success: false,
+          message: `Please wait ${60 - timeSinceLastSent} seconds before requesting new verification email.`,
+          lastSentAt: existingToken.lastSentAt,
+        };
+      }
+    }
+
     // Generate a new token and its hashed version
     const token = uuidv4();
     const hashedToken = await bcrypt.hash(token, saltRounds);
@@ -38,7 +57,7 @@ export const generateAndSendVerificationToken = protectedProcedure
 
         await ctx.prisma.universityEmailVerificationToken.update({
           where: { id: existingToken.id },
-          data: { token: hashedToken, expires: expires },
+          data: { token: hashedToken, expires: expires, lastSentAt: now },
         });
       } else {
         // If no existing token is found, create a new record with the hashed token and expiry
@@ -48,6 +67,7 @@ export const generateAndSendVerificationToken = protectedProcedure
             email: email,
             token: hashedToken,
             expires: expires,
+            lastSentAt: now,
           },
         });
       }
@@ -1198,6 +1218,7 @@ export const generateAndSendVerificationToken = protectedProcedure
       return {
         success: true,
         message: "Verification token generated and email sent successfully.",
+        lastSentAt: now,
       };
     } catch {
       return {

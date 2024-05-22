@@ -29,6 +29,10 @@ export const Protected: React.FC<{
     return unauthenticated();
   }
 
+  if (!session?.user?.updated) {
+    return unauthenticated();
+  }
+
   if (!session || !session.user) {
     return unauthenticated();
   }

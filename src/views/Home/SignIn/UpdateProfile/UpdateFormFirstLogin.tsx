@@ -1,4 +1,11 @@
-import { Button, Checkbox, SelectField, TextInputField } from "evergreen-ui";
+import {
+  Button,
+  Checkbox,
+  SelectField,
+  TextInputField,
+  FormField,
+  TagInput,
+} from "evergreen-ui";
 import React, { useState, useEffect } from "react";
 import { ListPPICabang } from "../../../../Components/optionsList/ListPPICabang";
 import type { RouterOutputs } from "../../../../utils/trpc";
@@ -24,6 +31,10 @@ export const UpdateProfileFormFirstLogin: React.FC<
   );
   const [expectedGraduation, setExpectedGraduation] = useState("");
   const [ppicabang, setPpiCabang] = useState("");
+  const [affiliation, setAffiliation] = useState<string[]>();
+  const [gender, setGender] = useState("");
+  const [address, setAddress] = useState("");
+  const [zipCode, setZipCode] = useState("");
   const [occupation, setOccupation] = useState("");
   const [location, setLocation] = useState("");
   const [bundesland, setBundesland] = useState("");
@@ -98,8 +109,12 @@ export const UpdateProfileFormFirstLogin: React.FC<
       birthDate: birthDate ? new Date(birthDate) : undefined,
       occupation,
       location,
+      address,
+      zipCode,
+      gender,
       ppicabang,
       bundesland,
+      affiliation,
       fieldOfStudy,
       studySpecialization,
       expectedGraduation: [
@@ -120,8 +135,8 @@ export const UpdateProfileFormFirstLogin: React.FC<
   // TODO: Make component reusable
 
   return (
-    <div className="flex w-full flex-col flex-wrap">
-      <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="flex w-full flex-col gap-5">
+      <div className="">
         <TextInputField
           label="Nama"
           value={name}
@@ -141,7 +156,19 @@ export const UpdateProfileFormFirstLogin: React.FC<
             setBirthDate(e.target.value)
           }
         />
-
+        <SelectField
+          label="Jenis Kelamin"
+          value={gender}
+          disabled={isLoading}
+          required={isProfileUpdated}
+          onChange={(e) => setGender(e.target.value)}
+        >
+          <option value="">Pilih Jenis Kelamin</option>
+          <option value="Laki-Laki">Laki-Laki</option>
+          <option value="Perempuan">Perempuan</option>
+        </SelectField>
+      </div>
+      <div className="">
         <SelectField
           label="Status Pendidikan Saat Ini"
           description="Pilih status pendidikan saat ini."
@@ -154,8 +181,7 @@ export const UpdateProfileFormFirstLogin: React.FC<
           <option value="ausbildung">Ausbildung</option>
           <option value="bachelor">Bachelor</option>
           <option value="master">Master</option>
-          <option value="doctor">Doctor</option>
-          <option value="professor">Professor</option>
+          <option value="doctor">Doctoral</option>
         </SelectField>
 
         <Autocomplete
@@ -171,7 +197,7 @@ export const UpdateProfileFormFirstLogin: React.FC<
               <TextInputField
                 {...getInputProps()}
                 label="Bidang Studi"
-                description="Bidang Studi dalam bahasa Jerman. Jika tidak ada di daftar bidang studi, silahkan tulis sendiri."
+                description="Bidang Studi dalam bahasa Jerman. Jika tidak ada di daftar bidang studi, silahkan pilih 'Others' dan informasikan kepada admin untuk menambah list jurusan."
                 ref={getRef}
                 disabled={isLoading}
                 required={isProfileUpdated}
@@ -192,23 +218,67 @@ export const UpdateProfileFormFirstLogin: React.FC<
           }
         />
 
-        {occupation === "professor" ? null : (
+        <TextInputField
+          label="Perkiraan Tanggal Kelulusan"
+          type="date"
+          disabled={isLoading}
+          value={expectedGraduation}
+          required={
+            isProfileUpdated &&
+            ["bachelor", "master", "doctoral", "ausbildung"].includes(
+              occupation,
+            )
+          }
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setExpectedGraduation(e.target.value)
+          }
+        />
+
+        <FormField
+          width="100%"
+          marginBottom={20}
+          label="Afiliasi"
+          description="Institusi Pendidikan (Kampus), Organisasi, Afiliasi, dan lainnya. (Dalam bentuk tags)"
+        >
+          <TagInput
+            width="100%"
+            id="affiliation"
+            values={affiliation}
+            onChange={(values: string[]) => {
+              setAffiliation(values);
+            }}
+          />
+        </FormField>
+      </div>
+
+      <div className="">
+        <div className="flex w-full flex-col gap-5 md:flex-row">
           <TextInputField
-            label="Perkiraan Tanggal Kelulusan"
-            type="date"
+            label="Alamat (Jalan, Nomor Rumah)"
+            description="Alamat tempat tinggal di Jerman"
+            placeholder="Braunschweigerstraße 53"
+            required={isProfileUpdated}
             disabled={isLoading}
-            value={expectedGraduation}
-            required={
-              isProfileUpdated &&
-              ["bachelor", "master", "doctor", "ausbildung"].includes(
-                occupation,
-              )
-            }
+            value={address}
+            width="100%"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setExpectedGraduation(e.target.value)
+              setAddress(e.target.value)
             }
           />
-        )}
+
+          <TextInputField
+            label="Kode Pos"
+            description="Kode Pos tempat tinggal di Jerman"
+            placeholder="38106"
+            required={isProfileUpdated}
+            disabled={isLoading}
+            value={zipCode}
+            width="100%"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setZipCode(e.target.value)
+            }
+          />
+        </div>
 
         <Autocomplete
           items={germanCities}
@@ -226,7 +296,7 @@ export const UpdateProfileFormFirstLogin: React.FC<
                 placeholder="Domisili"
                 ref={getRef}
                 disabled={isLoading}
-                description="Lokasi domisili anda di Jerman"
+                description="Lokasi domisili kota anda di Jerman"
                 {...getInputProps()}
               />
             );
@@ -275,12 +345,14 @@ export const UpdateProfileFormFirstLogin: React.FC<
             );
           })}
         </SelectField>
+      </div>
 
-        <div className="py-3">
+      <div className="flex flex-col pb-2">
+        <div className="">
           <Checkbox
             label={
               <h1 className="font-bold">
-                Setuju dengan syarat dan ketentuan yang berlaku. yang berlaku *
+                Setuju dengan syarat dan ketentuan yang berlaku *
               </h1>
             }
             checked={checkedPrivacy}
@@ -304,7 +376,7 @@ export const UpdateProfileFormFirstLogin: React.FC<
           </p>
         </div>
 
-        <div className="py-3">
+        <div className="">
           <Checkbox
             label={
               <h1 className="font-bold">
@@ -325,18 +397,17 @@ export const UpdateProfileFormFirstLogin: React.FC<
             persetujuan anda
           </p>
         </div>
+      </div>
+      <FormError message={formError} />
 
-        <FormError message={formError} />
-
-        <Button
-          type="submit"
-          appearance="primary"
-          isLoading={isLoading}
-          className="mt-10 w-full"
-        >
-          Save
-        </Button>
-      </form>
-    </div>
+      <Button
+        type="submit"
+        appearance="primary"
+        isLoading={isLoading}
+        className="mt-10 w-full"
+      >
+        Save
+      </Button>
+    </form>
   );
 };

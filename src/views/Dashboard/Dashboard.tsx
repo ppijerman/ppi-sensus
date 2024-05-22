@@ -46,7 +46,7 @@ export const Dashboard: NextPage = () => {
                 <PPICabangGraph ppiCabangStats={ppiCabangStats} />
               </Card>
             </div>
-            <Card className="">
+            <Card className="flex flex-col items-center justify-center">
               <h1 className="mb-5 text-2xl font-semibold">
                 Demografi Mahasiswa Indonesia di Jerman
               </h1>

@@ -14,16 +14,16 @@ export const TermsAndConditions: React.FC = () => {
       <div className="isolate flex flex-col items-center justify-center bg-white">
         <CustomBackground />
 
-        <div className="flex w-full flex-col items-center px-3 pt-20 text-gray-600 md:w-1/2">
+        <div className="flex w-[90%] flex-col gap-5 px-3 pt-20 text-gray-600 md:w-1/2">
           <Link href="/">
             <Logo />
           </Link>
-          <h1 className="mx-auto w-full py-10 text-center text-4xl font-bold text-gray-900">
-            Terms and Conditions - Sensus PPI Jerman [DRAFT]
+          <h1 className="w-full py-10 text-4xl font-bold text-gray-900">
+            Syarat dan Ketentuan - Sensus PPI Jerman
           </h1>
           <p>
-            These terms and conditions (“Agreement”) set forth the general terms
-            and conditions of your use of the{" "}
+            Syarat dan ketentuan (&quot;Perjanjian&quot;) ini menetapkan syarat
+            dan ketentuan umum penggunaan Anda atas situs web{" "}
             <a
               href="https://sensus.ppijerman.org"
               target="_blank"
@@ -32,275 +32,380 @@ export const TermsAndConditions: React.FC = () => {
             >
               sensus.ppijerman.org
             </a>{" "}
-            website (“Website” or “Service”) and any of its related products and
-            services (collectively, “Services”). This Agreement is legally
-            binding between you (“User”, “you” or “your”) and Perhimpunan
-            Pelajar Indonesia di Jerman e.V (doing business as “PPI Jerman”,
-            “we”, “us” or “our”). If you are entering into this Agreement on
-            behalf of a business or other legal entity, you represent that you
-            have the authority to bind such entity to this Agreement, in which
-            case the terms “User”, “you” or “your” shall refer to such entity.
-            If you do not have such authority, or if you do not agree with the
-            terms of this Agreement, you must not accept this Agreement and may
-            not access and use the Website and Services. By accessing and using
-            the Website and Services, you acknowledge that you have read,
-            understood, and agree to be bound by the terms of this Agreement.
-            You acknowledge that this Agreement is a contract between you and
-            PPI Jerman, even though it is electronic and is not physically
-            signed by you, and it governs your use of the Website and Services.
+            (&quot;Situs Web&quot; atau &quot;Layanan&quot;) dan produk serta
+            layanan terkait apa pun (secara kolektif, &quot;Layanan&quot;).
+            Perjanjian ini secara hukum mengikat antara Anda
+            (&quot;Pengguna&quot;, &quot;Anda&quot; atau &quot;milik Anda&quot;)
+            dan Vereinigung Indonesischer Studenten e.V. (berbisnis sebagai
+            &quot;PPI Jerman&quot;, &quot;kami&quot;, &quot;kami&quot;, atau
+            &quot;milik kami&quot;). Jika Anda memasuki Perjanjian ini atas nama
+            bisnis atau entitas hukum lain, Anda menyatakan bahwa Anda memiliki
+            wewenang untuk mengikat entitas tersebut pada Perjanjian ini, dalam
+            hal ini istilah &quot;Pengguna&quot;, &quot;Anda&quot;, atau
+            &quot;milik Anda&quot; akan merujuk kepada entitas tersebut. Jika
+            Anda tidak memiliki wewenang tersebut, atau jika Anda tidak setuju
+            dengan syarat-syarat Perjanjian ini, Anda tidak boleh menerima
+            Perjanjian ini dan tidak dapat mengakses dan menggunakan Situs Web
+            dan Layanan. Dengan mengakses dan menggunakan Situs Web dan Layanan,
+            Anda mengakui bahwa Anda telah membaca, memahami, dan setuju untuk
+            terikat oleh syarat-syarat Perjanjian ini. Anda mengakui bahwa
+            Perjanjian ini adalah kontrak antara Anda dan PPI Jerman, meskipun
+            bersifat elektronik dan tidak ditandatangani secara fisik oleh Anda,
+            dan mengatur penggunaan Anda atas Situs Web dan Layanan.
           </p>
           <div className="w-full py-10">
             <h3 className="pb-5 pt-10 text-xl font-bold text-gray-700">
-              Table of contents
+              Daftar Isi
             </h3>
             <ol className="flex list-inside list-decimal flex-col gap-2">
               <li>
-                <a href="#accounts-and-membership">Accounts and membership</a>
+                <a href="#Akun-dan-Keanggotaan">Akun dan Keanggotaan</a>
               </li>
               <li>
-                <a href="#links-to-other-resources">Links to other resources</a>
-              </li>
-              <li>
-                <a href="#prohibited-uses">Prohibited uses</a>
-              </li>
-              <li>
-                <a href="#intellectual-property-rights">
-                  Intellectual property rights
+                <a href="#Tautan-ke-Sumber-Daya Lain">
+                  Tautan ke Sumber Daya Lain
                 </a>
               </li>
               <li>
-                <a href="#indemnification">Indemnification</a>
+                <a href="#penggunaan-yang-dilarang">Penggunaan yang Dilarang</a>
               </li>
               <li>
-                <a href="#severability">Severability</a>
+                <a href="#Hak-Kekayaan-Intelektual">Hak Kekayaan Intelektual</a>
               </li>
               <li>
-                <a href="#dispute-resolution">Dispute resolution</a>
-              </li>
-              <li>
-                <a href="#changes-and-amendments">Changes and amendments</a>
-              </li>
-              <li>
-                <a href="#acceptance-of-these-terms">
-                  Acceptance of these terms
+                <a href="#Lokasi-Penyimpanan-Data">
+                  Lokasi Penyimpanan dan Transfer Data
                 </a>
               </li>
               <li>
-                <a href="#contacting-us">Contacting us</a>
+                <a href="#waktu-penyimpanan-data">Waktu Penyimpanan Data</a>
+              </li>
+              <li>
+                <a href="#hak-dari-pemilik-data">Hak dari Pemilik Data</a>
+              </li>
+              <li>
+                <a href="#indemnifikasi">Indemnifikasi</a>
+              </li>
+              <li>
+                <a href="#keterpisahan">Keterpisahan</a>
+              </li>
+              <li>
+                <a href="#penyelesaian-sengketa">Penyelesaian Sengketa</a>
+              </li>
+              <li>
+                <a href="#perubahan-dan-amandemen">Perubahan dan Amandemen</a>
+              </li>
+              <li>
+                <a href="#penerimaan-syarat-dan-ketentuan">
+                  Penerimaan Syarat-Syarat ini
+                </a>
+              </li>
+              <li>
+                <a href="#menghubungi-kami">Menghubungi Kami</a>
               </li>
             </ol>
           </div>
           <h2
-            id="accounts-and-membership"
+            id="Akun-dan-Keanggotaan"
             className="w-full pb-2 pt-5 text-lg font-semibold"
           >
-            1. Accounts and membership
+            1. Akun dan Keanggotaan
           </h2>
           <p>
-            You must be at least 18 years of age to use the Website and
-            Services. By using the Website and Services and by agreeing to this
-            Agreement you warrant and represent that you are at least 18 years
-            of age. If you create an account on the Website, you are responsible
-            for maintaining the security of your account and you are fully
-            responsible for all activities that occur under the account and any
-            other actions taken in connection with it. We may, but have no
-            obligation to, monitor and review new accounts before you may sign
-            in and start using the Services. Providing false contact information
-            of any kind may result in the termination of your account. You must
-            immediately notify us of any unauthorized uses of your account or
-            any other breaches of security. We will not be liable for any acts
-            or omissions by you, including any damages of any kind incurred as a
-            result of such acts or omissions. We may suspend, disable, or delete
-            your account (or any part thereof) if we determine that you have
-            violated any provision of this Agreement or that your conduct or
-            content would tend to damage our reputation and goodwill. If we
-            delete your account for the foregoing reasons, you may not
-            re-register for our Services. We may block your email address and
-            Internet protocol address to prevent further registration.
+            Anda harus berusia minimal 18 tahun untuk dapat mengisi data diri
+            dalam Sensus PPI Jerman. Dengan menyetujui Syarat dan Ketentuan ini,
+            Anda menjamin dan menyatakan bahwa Anda berusia minimal 18 tahun.
+            Dengan menyetujui Syarat dan Ketentuan ini, Kami bertanggung jawab
+            untuk menjaga keamanan data Anda dan Anda sepenuhnya bertanggung
+            jawab atas semua aktivitas yang terjadi terhadap data yang kami
+            kumpulkan dan setiap tindakan lain yang diambil sehubungan dengan
+            itu. Kami memiliki kewajiban, untuk memantau dan meninjau data Anda.
+          </p>
+          <p>
+            Memberikan informasi kontak palsu apa pun dapat mengakibatkan
+            penghapusan data.
+          </p>
+          <p>
+            Kami dapat menangguhkan, atau menghapus data milik Anda (atau bagian
+            darinya) jika diperlukan.
           </p>
           <h2
-            id="links-to-other-resources"
+            id="Tautan-ke-Sumber-Daya Lain"
             className="w-full pb-2 pt-5 text-lg font-semibold"
           >
-            2. Links to other resources
+            2. Tautan ke Sumber Daya Lain
           </h2>
           <p>
-            Although the Website and Services may link to other resources (such
-            as websites, mobile applications, etc.), we are not, directly or
-            indirectly, implying any approval, association, sponsorship,
-            endorsement, or affiliation with any linked resource, unless
-            specifically stated herein. We are not responsible for examining or
-            evaluating, and we do not warrant the offerings of, any businesses
-            or individuals or the content of their resources. We do not assume
-            any responsibility or liability for the actions, products, services,
-            and content of any other third parties. You should carefully review
-            the legal statements and other conditions of use of any resource
-            which you access through a link on the Website. Your linking to any
-            other off-site resources is at your own risk.
+            Meskipun Situs Web dan Layanan dapat menautkan ke sumber daya lain
+            (seperti situs web, aplikasi seluler, dll.), kami tidak, secara
+            langsung atau tidak langsung, menyiratkan persetujuan, asosiasi,
+            sponsor, dukungan, atau afiliasi dengan sumber daya yang ditautkan,
+            kecuali secara spesifik dinyatakan di sini.
+          </p>{" "}
+          <p>
+            Kami tidak bertanggung jawab untuk memeriksa atau mengevaluasi, dan
+            kami tidak menjamin penawaran dari, bisnis atau individu mana pun
+            atau konten sumber daya mereka.
+          </p>{" "}
+          <p>
+            Kami tidak mengasumsikan tanggung jawab atau kewajiban atas
+            tindakan, produk, layanan, dan konten pihak ketiga mana pun. Anda
+            harus meninjau dengan hati-hati pernyataan hukum dan kondisi
+            penggunaan lain dari sumber daya apa pun yang Anda akses melalui
+            tautan di Situs Web. Tautan Anda ke sumber daya lain di luar situs
+            adalah risiko Anda sendiri.
           </p>
           <h2
-            id="prohibited-uses"
+            id="penggunaan-yang-dilarang"
             className="w-full pb-2 pt-5 text-lg font-semibold"
           >
-            3. Prohibited uses
+            3. Penggunaan yang Dilarang
           </h2>
           <p>
-            In addition to other terms as set forth in the Agreement, you are
-            prohibited from using the Website and Services or Content: (a) for
-            any unlawful purpose; (b) to solicit others to perform or
-            participate in any unlawful acts; (c) to violate any international,
-            federal, provincial or state regulations, rules, laws, or local
-            ordinances; (d) to infringe upon or violate our intellectual
-            property rights or the intellectual property rights of others; (e)
-            to harass, abuse, insult, harm, defame, slander, disparage,
-            intimidate, or discriminate based on gender, sexual orientation,
-            religion, ethnicity, race, age, national origin, or disability; (f)
-            to submit false or misleading information; (g) to upload or transmit
-            viruses or any other type of malicious code that will or may be used
-            in any way that will affect the functionality or operation of the
-            Website and Services, third party products and services, or the
-            Internet; (h) to spam, phish, pharm, pretext, spider, crawl, or
-            scrape; (i) for any obscene or immoral purpose; or (j) to interfere
-            with or circumvent the security features of the Website and
-            Services, third party products and services, or the Internet. We
-            reserve the right to terminate your use of the Website and Services
-            for violating any of the prohibited uses.
+            Selain ketentuan lain yang ditetapkan dalam Perjanjian, Anda
+            dilarang menggunakan Situs Web dan Layanan kami:
+            <ul className="flex list-inside list-[lower-alpha] flex-col gap-1 pt-3">
+              <li>untuk tujuan yang melanggar hukum;</li>
+              <li>
+                untuk meminta orang lain melakukan atau berpartisipasi dalam
+                tindakan melanggar hukum;
+              </li>
+              <li>
+                untuk melanggar peraturan, aturan, undang-undang internasional,
+                federal, provinsi, atau negara bagian, atau peraturan setempat;
+              </li>
+              <li>
+                untuk melanggar atau melawan hak kekayaan intelektual kami atau
+                hak kekayaan intelektual orang lain;
+              </li>
+              <li>
+                untuk melecehkan, menganiaya, menghina, merugikan, memfitnah,
+                mencemarkan nama baik, merendahkan, mengintimidasi, atau
+                mendiskriminasi berdasarkan jenis kelamin, orientasi seksual,
+                agama, etnisitas, ras, usia, asal negara, atau disabilitas;
+              </li>
+              <li>
+                untuk mengirimkan informasi palsu atau menyesatkan; untuk
+                mengunggah atau mentransmisikan virus atau jenis kode jahat
+                lainnya yang akan atau mungkin digunakan dengan cara apa pun
+                yang akan mempengaruhi fungsionalitas atau operasi Situs Web dan
+                Layanan, produk dan layanan pihak ketiga, atau Internet;
+              </li>
+              <li>
+                untuk spam, phish, pharm, pretext, spider, crawl, atau scrape;
+              </li>
+              <li>untuk tujuan cabul atau tidak bermoral; atau</li>
+              <li>
+                untuk mengganggu atau menghindari fitur keamanan Situs Web dan
+                Layanan, produk dan layanan pihak ketiga, atau Internet. Kami
+                berhak untuk menghentikan penggunaan Anda atas Situs Web dan
+                Layanan karena melanggar penggunaan yang dilarang.
+              </li>
+            </ul>
           </p>
           <h2
-            id="intellectual-property-rights"
+            id="Hak-Kekayaan-Intelektual"
             className="w-full pb-2 pt-5 text-lg font-semibold"
           >
-            4. Intellectual property rights
+            4. Hak Kekayaan Intelektual
           </h2>
           <p>
-            “Intellectual Property Rights” means all present and future rights
-            conferred by statute, common law or equity in or in relation to any
-            copyright and related rights, trademarks, designs, patents,
-            inventions, goodwill and the right to sue for passing off, rights to
-            inventions, rights to use, and all other intellectual property
-            rights, in each case whether registered or unregistered and
-            including all applications and rights to apply for and be granted,
-            rights to claim priority from, such rights and all similar or
-            equivalent rights or forms of protection and any other results of
-            intellectual activity which subsist or will subsist now or in the
-            future in any part of the world. This Agreement does not transfer to
-            you any intellectual property owned by PPI Jerman or third parties,
-            and all rights, titles, and interests in and to such property will
-            remain (as between the parties) solely with PPI Jerman. All
-            trademarks, service marks, graphics and logos used in connection
-            with the Website and Services, are trademarks or registered
-            trademarks of PPI Jerman or its licensors. Other trademarks, service
-            marks, graphics and logos used in connection with the Website and
-            Services may be the trademarks of other third parties. Your use of
-            the Website and Services grants you no right or license to reproduce
-            or otherwise use any of PPI Jerman or third party trademarks.
+            “Hak Kekayaan Intelektual” berarti semua hak yang ada sekarang dan
+            di masa depan yang diberikan oleh statuta, hukum umum atau ekuitas
+            dalam atau berkaitan dengan hak cipta dan hak terkait, merek dagang,
+            desain, paten, penemuan, niat baik dan hak untuk mengajukan gugatan
+            untuk pelanggaran, hak atas penemuan, hak untuk menggunakan, dan
+            semua hak kekayaan intelektual lainnya, dalam setiap kasus baik yang
+            terdaftar atau tidak terdaftar dan termasuk semua aplikasi dan hak
+            untuk mengajukan dan diberikan, hak untuk mengklaim prioritas dari,
+            hak tersebut dan semua hak atau bentuk perlindungan serupa atau
+            setara dan hasil lain dari aktivitas intelektual yang ada atau akan
+            ada di masa depan di mana pun di dunia.
+          </p>
+          <p>
+            {" "}
+            Perjanjian ini tidak mentransfer kepada Anda hak kekayaan
+            intelektual apa pun yang dimiliki oleh PPI Jerman atau pihak ketiga,
+            dan semua hak, judul, dan kepentingan dalam dan terhadap properti
+            tersebut akan tetap (seperti antara para pihak) secara eksklusif
+            dengan PPI Jerman.
+          </p>
+          <p>
+            Semua merek dagang, merek layanan, grafis dan logo yang digunakan
+            dalam kaitan dengan Situs Web dan Layanan, adalah merek dagang atau
+            merek dagang terdaftar dari PPI Jerman atau pemberi lisensinya.
+            Merek dagang, merek layanan, grafis dan logo lain yang digunakan
+            dalam kaitan dengan Situs Web dan Layanan mungkin adalah merek
+            dagang dari pihak ketiga lainnya. Penggunaan Anda atas Situs Web dan
+            Layanan tidak memberi Anda hak atau lisensi untuk mereproduksi atau
+            menggunakan merek dagang PPI Jerman atau pihak ketiga apa pun.
           </p>
           <h2
-            id="indemnification"
+            id="Lokasi-Penyimpanan-Data"
             className="w-full pb-2 pt-5 text-lg font-semibold"
           >
-            5. Indemnification
+            5. Lokasi Penyimpanan Data
           </h2>
           <p>
-            You agree to indemnify and hold PPI Jerman and its affiliates,
-            directors, officers, employees, agents, suppliers and licensors
-            harmless from and against any liabilities, losses, damages or costs,
-            including reasonable attorneys’ fees, incurred in connection with or
-            arising from any third party allegations, claims, actions, disputes,
-            or demands asserted against any of them as a result of or relating
-            to your Content, your use of the Website and Services or any willful
-            misconduct on your part.
+            PPI Jerman tidak akan mengalihkan data pribadi Pengguna kepada pihak
+            ketiga, kecuali transfer tersebut diperlukan untuk tujuan yang telah
+            ditetapkan, dan/atau diperlukan oleh hukum, dan sesuai dengan
+            ketentuan yang berlaku dalam GDPR.
           </p>
           <h2
-            id="severability"
+            id="waktu-penyimpanan-data"
             className="w-full pb-2 pt-5 text-lg font-semibold"
           >
-            6. Severability
+            6. Waktu Penyimpanan Data
           </h2>
           <p>
-            All rights and restrictions contained in this Agreement may be
-            exercised and shall be applicable and binding only to the extent
-            that they do not violate any applicable laws and are intended to be
-            limited to the extent necessary so that they will not render this
-            Agreement illegal, invalid or unenforceable. If any provision or
-            portion of any provision of this Agreement shall be held to be
-            illegal, invalid or unenforceable by a court of competent
-            jurisdiction, it is the intention of the parties that the remaining
-            provisions or portions thereof shall constitute their agreement with
-            respect to the subject matter hereof, and all such remaining
-            provisions or portions thereof shall remain in full force and
-            effect.
+            PPI Jerman berkomitmen untuk menghapus data Anda yang tidak lagi
+            diperlukan untuk tujuan pengolahan yang telah ditentukan. Namun,
+            selama data Anda yang disimpan dalam basis data PPI Jerman masih
+            diperlukan untuk tujuan-tujuan tersebut, data tersebut akan
+            dipertahankan untuk jangka waktu yang tidak ditetapkan, sesuai
+            dengan kepatuhan terhadap prinsip-prinsip pengolahan data yang
+            berlaku dalam GDPR.
           </p>
           <h2
-            id="dispute-resolution"
+            id="hak-dari-pemilik-data"
             className="w-full pb-2 pt-5 text-lg font-semibold"
           >
-            7. Dispute resolution
+            7. Hak dari Pemilik Data
           </h2>
           <p>
-            The formation, interpretation, and performance of this Agreement and
-            any disputes arising out of it shall be governed by the substantive
-            and procedural laws of Germany without regard to its rules on
-            conflicts or choice of law and, to the extent applicable, the laws
-            of Germany. The exclusive jurisdiction and venue for actions related
-            to the subject matter hereof shall be the courts located in Germany,
-            and you hereby submit to the personal jurisdiction of such courts.
-            You hereby waive any right to a jury trial in any proceeding arising
-            out of or related to this Agreement. The United Nations Convention
-            on Contracts for the International Sale of Goods does not apply to
-            this Agreement.
+            Anda dapat menghubungi kami untuk memperoleh akses ke data pribadi
+            Anda yang telah disimpan (Pasal 15 GDPR) dan, dengan memenuhi
+            beberapa syarat, memperoleh perbaikan (Pasal 16 GDPR) atau
+            penghapusan (Pasal 17 GDPR) data Anda. Anda juga memiliki hak untuk
+            memperoleh pembatasan pengolahan data Anda (Pasal 18 GDPR) dan hak
+            untuk menerima data yang Anda berikan dalam format yang terstruktur,
+            umum digunakan, dan dapat dibaca mesin (Pasal 20 GDPR).
+          </p>
+          <p>
+            {" "}
+            Anda juga memiliki hak untuk keberatan, berdasarkan alasan yang
+            berkaitan dengan situasi khusus Anda, terhadap pengolahan data
+            pribadi Anda yang sah di mana dasar hukumnya ada (Pasal 21 GDPR).
+          </p>
+          <p>
+            {" "}
+            Anda tidak memiliki hak untuk keberatan jika ada kepentingan publik
+            yang mendesak dalam pengolahan yang mengesampingkan kepentingan
+            Anda, atau jika pengolahan diperlukan oleh hukum.
           </p>
           <h2
-            id="changes-and-amendments"
+            id="indemnifikasi"
             className="w-full pb-2 pt-5 text-lg font-semibold"
           >
-            8. Changes and amendments
+            8. Indemnifikasi
           </h2>
           <p>
-            We reserve the right to modify this Agreement or its terms related
-            to the Website and Services at any time at our discretion. When we
-            do, we will post a notification on the main page of the Website,
-            send you an email to notify you. We may also provide notice to you
-            in other ways at our discretion, such as through the contact
-            information you have provided.
-          </p>
-          <p>
-            An updated version of this Agreement will be effective immediately
-            upon the posting of the revised Agreement unless otherwise
-            specified. Your continued use of the Website and Services after the
-            effective date of the revised Agreement (or such other act specified
-            at that time) will constitute your consent to those changes.
+            Anda setuju untuk mengganti kerugian dan membebaskan PPI Jerman dan
+            afiliasinya, direktur, pejabat, karyawan, agen, pemasok, dan pemberi
+            lisensi dari dan terhadap setiap kewajiban, kerugian, kerusakan,
+            atau biaya, termasuk biaya pengacara yang wajar, yang dikeluarkan
+            sehubungan dengan atau timbul dari setiap tuntutan, klaim, tindakan,
+            perselisihan, atau permintaan pihak ketiga yang ditegakkan terhadap
+            mereka sebagai hasil dari atau berkaitan dengan Konten Anda,
+            penggunaan Anda atas Situs Web dan Layanan atau setiap kesalahan
+            tindakan dari pihak Anda.
           </p>
           <h2
-            id="acceptance-of-these-terms"
+            id="keterpisahan"
             className="w-full pb-2 pt-5 text-lg font-semibold"
           >
-            9. Acceptance of these terms
+            9. Keterpisahan
           </h2>
           <p>
-            You acknowledge that you have read this Agreement and agree to all
-            its terms and conditions. By accessing and using the Website and
-            Services you agree to be bound by this Agreement. If you do not
-            agree to abide by the terms of this Agreement, you are not
-            authorized to access or use the Website and Services. This policy
-            has been created with the help of the
-            <a
-              href="https://www.websitepolicies.com/terms-and-conditions-generator"
-              target="_blank"
-            >
-              terms and conditions generator
-            </a>
-            .
+            Semua hak dan pembatasan yang terkandung dalam Perjanjian ini dapat
+            dilaksanakan dan hanya akan berlaku dan mengikat sejauh mereka tidak
+            melanggar hukum yang berlaku dan dimaksudkan untuk dibatasi sejauh
+            perlu sehingga mereka tidak akan membuat Perjanjian ini ilegal,
+            tidak valid atau tidak dapat diberlakukan.
+          </p>
+          <p>
+            Jika ketentuan apa pun atau bagian dari ketentuan Perjanjian ini
+            dianggap ilegal, tidak valid, atau tidak dapat diberlakukan oleh
+            pengadilan yang berwenang, niat para pihak adalah bahwa ketentuan
+            yang tersisa atau bagian darinya akan membentuk perjanjian mereka
+            mengenai materi yang bersangkutan di sini, dan semua ketentuan
+            tersebut atau bagian darinya akan tetap dalam kekuatan penuh dan
+            efek.
           </p>
           <h2
-            id="contacting-us"
+            id="penyelesaian-sengketa"
             className="w-full pb-2 pt-5 text-lg font-semibold"
           >
-            10. Contacting us
+            10. Penyelesaian Sengketa
+          </h2>
+          <p>
+            Pembentukan, interpretasi, dan pelaksanaan Perjanjian ini serta
+            setiap sengketa yang timbul darinya akan diatur oleh hukum
+            substantif dan prosedural Jerman tanpa memperhatikan
+            aturan-aturannya tentang konflik atau pilihan hukum dan, sejauh
+            berlaku, hukum Jerman.
+          </p>
+          <p>
+            Yurisdiksi eksklusif dan tempat untuk tindakan yang terkait dengan
+            materi di sini akan menjadi pengadilan yang terletak di Jerman, dan
+            Anda dengan ini menyerahkan diri kepada yurisdiksi personal dari
+            pengadilan tersebut.
+          </p>
+          <p>
+            Anda dengan ini melepaskan hak apa pun untuk sidang juri dalam
+            proses apa pun yang timbul dari atau terkait dengan Perjanjian ini.
+            Konvensi Perserikatan Bangsa-Bangsa tentang Kontrak untuk Penjualan
+            Internasional Barang tidak berlaku untuk Perjanjian ini.
+          </p>
+          <h2
+            id="perubahan-dan-amandemen"
+            className="w-full pb-2 pt-5 text-lg font-semibold"
+          >
+            11. Perubahan dan Amandemen
+          </h2>
+          <p>
+            Kami berhak untuk memodifikasi Perjanjian ini atau syarat-syaratnya
+            yang terkait dengan Situs Web dan Layanan kapan saja atas kebijakan
+            kami. Ketika kami melakukannya, kami akan melakukan pemberitahuan di
+            halaman utama Situs Web kami, mengirim Anda email untuk memberitahu
+            Anda. Kami juga dapat memberikan pemberitahuan kepada Anda dengan
+            cara lain atas kebijakan kami, seperti melalui informasi kontak yang
+            telah Anda sediakan.
+          </p>
+          <p>
+            {" "}
+            Versi yang diperbarui dari Perjanjian ini akan segera berlaku
+            setelah pemberitahuan Perjanjian yang direvisi kecuali dinyatakan
+            lain.
+          </p>
+          <p>
+            {" "}
+            Penggunaan Anda yang berkelanjutan atas Situs Web dan Layanan
+            setelah tanggal efektif dari Perjanjian yang direvisi (atau tindakan
+            lain yang ditentukan pada saat itu) akan merupakan persetujuan Anda
+            terhadap perubahan tersebut.
+          </p>
+          <h2
+            id="penerimaan-syarat-dan-ketentuan"
+            className="w-full pb-2 pt-5 text-lg font-semibold"
+          >
+            12. Penerimaan Syarat dan Ketentuan
           </h2>
           <p className="w-full">
-            If you have any questions, concerns, or complaints regarding this
-            Agreement, we encourage you to contact us using the details below:
+            Anda mengakui bahwa Anda telah membaca Perjanjian ini dan menyetujui
+            semua syarat dan ketentuannya. Dengan mengakses dan menggunakan
+            Situs Web dan Layanan Anda setuju untuk terikat oleh Perjanjian ini.
+          </p>
+          <h2
+            id="menghubungi-kami"
+            className="w-full pb-2 pt-5 text-lg font-semibold"
+          >
+            13. Menghubungi Kami
+          </h2>
+          <p className="w-full">
+            Jika Anda memiliki pertanyaan, kekhawatiran, atau keluhan mengenai
+            Perjanjian ini, kami mendorong Anda untuk menghubungi kami melalui:
           </p>
           <p className="w-full">
             <a
@@ -320,7 +425,7 @@ export const TermsAndConditions: React.FC = () => {
             </a>
           </p>
           <p className="pb-20 pt-32 text-lg font-bold">
-            This document was last updated on March 28, 2024
+            This document was last updated on April 18, 2024
           </p>
         </div>
       </div>

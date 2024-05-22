@@ -17,14 +17,18 @@ export const updateUserLogin = protectedProcedure
     z.object({
       id: z.string(),
       name: z.string(),
+      gender: z.string(),
       birthDate: z.date().optional(),
       occupation: z.string(),
       location: z.string(),
       fieldOfStudy: z.string(),
+      address: z.string(),
+      zipCode: z.string(),
       studySpecialization: z.string().optional(),
       bundesland: z.string(),
       expectedGraduation: z.date().optional(),
       ppicabang: z.string(),
+      affiliation: z.array(z.string()).optional(),
       agreedToTermsAndCond: z.boolean(),
       forwardDataThirdParty: z.boolean().optional(),
       subscribeNewsletterEmail: z.boolean().optional(),
@@ -36,23 +40,38 @@ export const updateUserLogin = protectedProcedure
       input: {
         id,
         name,
+        gender,
         birthDate,
         occupation,
         location,
+        address,
+        zipCode,
         ppicabang,
         bundesland,
         expectedGraduation,
         studySpecialization,
         fieldOfStudy,
+        affiliation,
         agreedToTermsAndCond,
         forwardDataThirdParty,
         subscribeNewsletterEmail,
       },
     }) => {
+      if (occupation === "ausbildung") {
+        await ctx.prisma.user.update({
+          where: { id },
+          data: {
+            verification: "VERIFIED",
+          },
+        });
+      }
       return await ctx.prisma.user.update({
         where: { id },
         data: {
           name,
+          gender,
+          address,
+          zipCode,
           birthDate,
           occupation,
           location,
@@ -63,6 +82,7 @@ export const updateUserLogin = protectedProcedure
           expectedGraduation,
           updated: true,
           agreedToTermsAndCond,
+          affiliation,
           agreedToTermsAndCondDate: new Date(),
           forwardDataThirdParty,
           forwardDataThirdPartyDate: new Date(),

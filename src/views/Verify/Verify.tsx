@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { Base, Protected, Card } from "../../Components";
 import { VerifyFormUni } from "./VerifyFormUni";
-import { VerifyFormAusbildung } from "./VerifyFormAusbildung";
 import { useSession } from "next-auth/react";
 import { OccupationBadges } from "../../Components/OccupationBadges";
 export const VerifyPage = () => {
@@ -21,11 +20,7 @@ export const VerifyPage = () => {
           </div>
           <div className="flex flex-col gap-2 py-4">
             <Card>
-              {session?.user?.occupation !== "ausbildung" ? (
-                <VerifyFormUni />
-              ) : (
-                <VerifyFormAusbildung />
-              )}
+              <VerifyFormUni />
             </Card>
           </div>
         </Protected>

@@ -7,7 +7,7 @@ const navigation: {
   }[];
 } = {
   main: [
-    { name: "Privacy", href: "#" },
+    { name: "Privacy", href: "/privacy" },
     { name: "T&C", href: "/terms-and-conditions" },
     { name: "Impressum", href: "#" },
   ],
