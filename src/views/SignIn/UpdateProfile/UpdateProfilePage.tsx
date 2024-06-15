@@ -1,10 +1,10 @@
 import React from "react";
 import { UpdateProfileFormFirstLogin } from "./UpdateFormFirstLogin";
 import { ProtectedUpdate } from "./ProtectedUpdate";
-import { trpc } from "../../../../utils/trpc";
-import { Card } from "../../../../Components/Card";
+import { trpc } from "@/utils/trpc";
+import { Card } from "@/Components/Card";
 import type { NextPage } from "next";
-import { Logo } from "../../../../Components";
+import { Logo } from "@/Components";
 import Link from "next/link";
 import Head from "next/head";
 

@@ -7,15 +7,12 @@ import {
   TagInput,
 } from "evergreen-ui";
 import React, { useState, useEffect } from "react";
-import { ListPPICabang } from "../../../../Components/optionsList/ListPPICabang";
-import type { RouterOutputs } from "../../../../utils/trpc";
-import { trpc } from "../../../../utils/trpc";
-import {
-  germanCities,
-  studiengangsListe,
-} from "../../../../Components/optionsList";
+import { ListPPICabang } from "@/Components/optionsList/ListPPICabang";
+import type { RouterOutputs } from "@/utils/trpc";
+import { trpc } from "@/utils/trpc";
+import { germanCities, studiengangsListe } from "@/Components/optionsList";
 import { Autocomplete } from "evergreen-ui";
-import { FormError } from "../../../../Components/ui";
+import { FormError } from "@/Components/ui";
 import Link from "next/link";
 
 type UpdateProfileFormFirstLoginProps = {
