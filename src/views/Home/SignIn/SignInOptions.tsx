@@ -1,7 +1,7 @@
 // pages/signin.js
 
 import Head from "next/head";
-import { Card, Footer } from "@/Components";
+import { Card, Footer } from "../../../Components";
 import { useRouter } from "next/router";
 import GoogleButton from "./GoogleSignInButton";
 
