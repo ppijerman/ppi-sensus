@@ -22,8 +22,16 @@ interface Stat {
 }
 
 export const PPICabangGraph: React.FC<Stat> = ({ ppiCabangStats }: Stat) => {
+  const modifiedPpiCabangStats = ppiCabangStats?.map((stat) => ({
+    label: stat.label.slice(4),
+    value: stat.value,
+    count: stat.count,
+  }));
+
   const [showAll, setShowAll] = useState(false);
-  const displayedStats = showAll ? ppiCabangStats : ppiCabangStats?.slice(0, 5);
+  const displayedStats = showAll
+    ? modifiedPpiCabangStats
+    : modifiedPpiCabangStats?.slice(0, 5);
 
   return (
     <div className="flex flex-col">
@@ -31,18 +39,36 @@ export const PPICabangGraph: React.FC<Stat> = ({ ppiCabangStats }: Stat) => {
         <h1 className="text-2xl font-bold">PPI Cabang</h1>
         <p className="text-gray-500">Distribusi PPI Cabang di Jerman</p>
       </div>
-      <div style={{ width: "100%", height: 300 }}>
+      <div style={{ width: "100%", height: 500 }}>
         <ResponsiveContainer>
           <BarChart
+            layout="vertical"
             data={displayedStats}
             barGap={0}
             barCategoryGap={0}
-            margin={{ top: 0, right: 0, left: -35, bottom: 0 }}
+            margin={{ top: 0, right: -20, left: 80, bottom: 0 }}
           >
-            <XAxis dataKey="label" />
-            <YAxis />
+            <YAxis
+              type="category"
+              dataKey="label"
+              padding={{
+                top: 0,
+                bottom: 0,
+              }}
+              minTickGap={5}
+              axisLine={false}
+              tickLine={false}
+              tick={{ fontSize: 14, dx: -5 }}
+              interval={0}
+            />
+            <XAxis type="number" axisLine={false} tickLine={false} tick={false} />
             <Tooltip />
-            <Bar dataKey="count" barSize={30} fill="#8CB9BD" />
+            <Bar
+              dataKey="count"
+              barSize={30}
+              fill="#8CB9BD"
+              name="Jumlah Anggota"
+            />
           </BarChart>
         </ResponsiveContainer>
       </div>
