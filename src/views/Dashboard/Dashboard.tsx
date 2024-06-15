@@ -26,10 +26,10 @@ export const Dashboard: NextPage = () => {
     { name: "Info belum lengkap", count: adminData?.updated },
   ];
   const stats = [
-    { name: "Ausbildung / Vokasi", count: data?.vocation },
-    { name: "Bachelor / S1", count: data?.bachelor },
-    { name: "Master / S2", count: data?.master },
-    { name: "PhD / S3", count: data?.doctorand },
+    { name: "Ausbildung", count: data?.vocation },
+    { name: "Bachelor", count: data?.bachelor },
+    { name: "Master", count: data?.master },
+    { name: "PhD", count: data?.doctorand },
     { name: "Profesor", count: data?.professor },
   ];
 
