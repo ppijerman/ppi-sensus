@@ -59,10 +59,8 @@ export const UpdateProfileFormFirstLogin: React.FC<
     });
 
   const handleFieldOfStudy = (selectedFieldOfStudy: string) => {
-    if (selectedFieldOfStudy) {
-      setFieldOfStudy(selectedFieldOfStudy);
-      console.log(selectedFieldOfStudy);
-    }
+    setFieldOfStudy(selectedFieldOfStudy);
+    console.log(selectedFieldOfStudy);
   };
 
   // handle cities
@@ -128,8 +126,7 @@ export const UpdateProfileFormFirstLogin: React.FC<
   const isProfileUpdated = !user!.updated;
 
   // TODO: Make component reusable
-  const newMajor =
-    fieldOfStudy && !studiengangsListe.find((s) => s.name === fieldOfStudy);
+
   return (
     <form onSubmit={handleSubmit} className="flex w-full flex-col gap-5">
       <div className="">
