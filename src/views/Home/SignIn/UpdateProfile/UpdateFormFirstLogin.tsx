@@ -1,22 +1,23 @@
 import {
+  Autocomplete,
   Button,
   Checkbox,
-  SelectField,
-  TextInputField,
   FormField,
+  SelectField,
   TagInput,
+  TextInputField,
 } from "evergreen-ui";
-import React, { useState, useEffect } from "react";
-import { ListPPICabang } from "../../../../Components/optionsList/ListPPICabang";
-import type { RouterOutputs } from "../../../../utils/trpc";
-import { trpc } from "../../../../utils/trpc";
+import Link from "next/link";
+import type { ChangeEvent } from "react";
+import React, { useEffect, useState } from "react";
 import {
   germanCities,
   studiengangsListe,
 } from "../../../../Components/optionsList";
-import { Autocomplete } from "evergreen-ui";
+import { ListPPICabang } from "../../../../Components/optionsList/ListPPICabang";
 import { FormError } from "../../../../Components/ui";
-import Link from "next/link";
+import type { RouterOutputs } from "../../../../utils/trpc";
+import { trpc } from "../../../../utils/trpc";
 
 type UpdateProfileFormFirstLoginProps = {
   user: RouterOutputs["user"]["getUser"];
@@ -57,17 +58,9 @@ export const UpdateProfileFormFirstLogin: React.FC<
       },
     });
 
-  // handle fieldOfStudy
-
-  type Studiengang = {
-    name: string;
-  };
-
-  const handleFieldOfStudy = (selectedFieldOfStudy: Studiengang) => {
-    if (selectedFieldOfStudy) {
-      setFieldOfStudy(selectedFieldOfStudy.name);
-      console.log(selectedFieldOfStudy);
-    }
+  const handleFieldOfStudy = (selectedFieldOfStudy: string) => {
+    setFieldOfStudy(selectedFieldOfStudy);
+    console.log(selectedFieldOfStudy);
   };
 
   // handle cities
@@ -189,15 +182,20 @@ export const UpdateProfileFormFirstLogin: React.FC<
           itemToString={(studiengangsListe) =>
             studiengangsListe ? studiengangsListe.name : ""
           }
-          onChange={handleFieldOfStudy}
+          onChange={(s) => handleFieldOfStudy(s.name)}
         >
           {(props) => {
             const { getInputProps, getRef } = props;
             return (
               <TextInputField
-                {...getInputProps()}
+                {...getInputProps({
+                  onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                    handleFieldOfStudy(e.target.value);
+                  },
+                  value: fieldOfStudy,
+                })}
                 label="Bidang Studi"
-                description="Bidang Studi dalam bahasa Jerman. Jika tidak ada di daftar bidang studi, silahkan pilih 'Others' dan informasikan kepada admin untuk menambah list jurusan."
+                description="Bidang Studi dalam bahasa Jerman. Jika tidak ada di daftar bidang studi, bisa diketik bebas, tetapi harap menghubungi admin."
                 ref={getRef}
                 disabled={isLoading}
                 required={isProfileUpdated}
