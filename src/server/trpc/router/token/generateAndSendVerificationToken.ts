@@ -15,22 +15,12 @@ export const generateAndSendVerificationToken = protectedProcedure
   )
   .mutation(async ({ ctx, input: { id, email } }) => {
     const now = new Date();
-
-    // Check if a token already exists for the given email or user ID
     const existingToken =
       await ctx.prisma.universityEmailVerificationToken.findFirst({
         where: { OR: [{ email: email }, { userId: id }] },
       });
 
     if (existingToken) {
-      if (existingToken.userId !== id) {
-        return {
-          success: false,
-          message:
-            "This email is already used for verification by another account. Please use a different email.",
-        };
-      }
-
       const lastSentAt = new Date(existingToken.lastSentAt);
       const timeSinceLastSent = (now.getTime() - lastSentAt.getTime()) / 1000; // seconds
 
@@ -56,11 +46,15 @@ export const generateAndSendVerificationToken = protectedProcedure
       ) {
         return { success: false, message: "User is already verified." };
       }
+      // Check if a token already exists for the given email or user ID
+      const existingToken =
+        await ctx.prisma.universityEmailVerificationToken.findFirst({
+          where: { OR: [{ email: email }, { userId: id }] },
+        });
 
       if (existingToken) {
-        // check whether token belongs to another account
-
         // If an existing token is found, update it with the new hashed token and expiry
+
         await ctx.prisma.universityEmailVerificationToken.update({
           where: { id: existingToken.id },
           data: { token: hashedToken, expires: expires, lastSentAt: now },
