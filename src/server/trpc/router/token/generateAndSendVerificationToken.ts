@@ -27,7 +27,7 @@ export const generateAndSendVerificationToken = protectedProcedure
       if (timeSinceLastSent < 60) {
         return {
           success: false,
-          message: `Please wait ${60 - timeSinceLastSent} seconds before requesting new verification email.`,
+          message: `Please wait ${Math.ceil(60 - timeSinceLastSent)} seconds before requesting new verification email.`,
           lastSentAt: existingToken.lastSentAt,
         };
       }
