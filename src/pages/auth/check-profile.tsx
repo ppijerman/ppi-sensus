@@ -33,10 +33,10 @@ export const CheckProfile = () => {
   }, [session, status, router, calledPush]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
+    <div className="flex min-h-screen flex-col gap-5 items-center justify-center">
       <Logo />
       <PuffLoader />
-      <h1 className="text-3xl font-bold">Verifying Account ... This may take a while</h1>
+      <h1 className="text-2xl font-semibold">Verifying Account ... This may take a while</h1>
     </div>
   );
 };
