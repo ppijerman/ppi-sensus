@@ -70,26 +70,31 @@ export const sendMail = async <T extends EmailTemplate>(
   template: T,
   props: PropsMap[NoInfer<T>],
 ) => {
-  if (env.NODE_ENV !== "production") {
-    console.log(
-      "📨 Email sent to:",
+  // if (env.NODE_ENV !== "production") {
+  //   console.log(
+  //     "📨 Email sent to:",
+  //     to,
+  //     "with template:",
+  //     template,
+  //     "and props:",
+  //     props,
+  //   );
+  //   return;
+  // }
+
+  try {
+    const { subject, body } = getEmailTemplate(template, props);
+
+    const mailOptions = {
+      from: env.EMAIL_FROM,
       to,
-      "with template:",
-      template,
-      "and props:",
-      props,
-    );
-    return;
+      subject,
+      html: body,
+    };
+
+    return transporter.sendMail(mailOptions);
+  } catch (error) {
+    console.error("Error sending email:", error);
+    throw new Error("Error sending email");
   }
-
-  const { subject, body } = getEmailTemplate(template, props);
-
-  const mailOptions = {
-    from: env.EMAIL_FROM,
-    to,
-    subject,
-    html: body,
-  };
-
-  return transporter.sendMail(mailOptions);
 };

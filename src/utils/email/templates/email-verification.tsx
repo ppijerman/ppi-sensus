@@ -1,5 +1,4 @@
 import { Body, Container, Head, Html, Preview, Section, Text } from "@react-email/components";
-import Image from "next/image";
 
 export interface EmailVerificationTemplateProps {
   verificationUrl: string;
@@ -14,7 +13,7 @@ export const EmailVerificationTemplate = ({ verificationUrl }: EmailVerification
         <Container style={container}>
           <Section>
             <Text style={logoContainer}>
-              <Image
+              <img
                 src={imgSource}
                 style={logo}
                 alt="Logo PPI Jerman"
