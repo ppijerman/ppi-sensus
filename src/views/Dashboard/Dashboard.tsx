@@ -26,7 +26,11 @@ export const Dashboard: NextPage = () => {
     { name: "Belum Terverifikasi", count: adminData?.unverified },
     { name: "Info belum lengkap", count: adminData?.updated },
   ];
-  const statsDemografi = [{ name: "Jumlah Mahasiswa", count: adminData?.users }];
+
+  const statsDemografi = [
+    { name: "Jumlah Mahasiswa", count: adminData?.users },
+    { name: "Mahasiswa Terverifikasi", count: adminData?.verified },
+  ];
   const statsMahasiswa = [
     { name: "Ausbildung", count: data?.vocation },
     { name: "Bachelor", count: data?.bachelor },
