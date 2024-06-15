@@ -72,7 +72,7 @@ export const GeoVis: React.FC<{ width: string }> = ({ width }) => {
         </svg>
       </div>
 
-      <div className="flex flex-col justify-center py-5">
+      {/* <div className="flex flex-col justify-center py-5">
         <AnimatePresence>
           {hoveredBundesland && (
             <motion.div
@@ -100,7 +100,7 @@ export const GeoVis: React.FC<{ width: string }> = ({ width }) => {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </div> */}
     </div>
   );
 };
