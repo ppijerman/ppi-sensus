@@ -22,12 +22,15 @@ export const generateAndSendVerificationToken = protectedProcedure
         where: { OR: [{ email: email }, { userId: id }] },
       });
 
+    const existingEmail = await ctx.prisma.user.findFirst({
+      where: { universityEmail: email },
+    });
+
     if (existingToken) {
-      if (existingToken.userId !== id) {
+      if (existingEmail) {
         return {
           success: false,
-          message:
-            "This email is already used for verification by another account. Please use a different email.",
+          message: `This email is already used for verification by another account. Please use a different email.`,
         };
       }
 
