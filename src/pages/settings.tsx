@@ -1,3 +1,3 @@
-import { Settings } from "../views/Settings/Settings";
+import { Settings } from "@/views/Settings/Settings";
 
 export default Settings;
