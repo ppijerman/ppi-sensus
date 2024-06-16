@@ -27,7 +27,7 @@ export const StatsMahasiswa: React.FC<StatisticOutput> = ({
         <h1 className="text-2xl font-bold">Mahasiswa</h1>
         <p className="text-gray-500">Perbandingan antar jenjang</p>
       </div>
-      <div className="h-[300px] w-full">
+      <div className="w-full h-[300px]">
         <ResponsiveContainer>
           <PieChart>
             <Pie
@@ -36,7 +36,7 @@ export const StatsMahasiswa: React.FC<StatisticOutput> = ({
               cy="50%"
               labelLine={false}
               label={renderCustomizedLabel}
-              outerRadius={110}
+              outerRadius={100}
               fill="#8884d8"
               dataKey="count"
             >
@@ -48,7 +48,7 @@ export const StatsMahasiswa: React.FC<StatisticOutput> = ({
               ))}
             </Pie>
             <Tooltip />
-            <Legend verticalAlign="bottom" height={36} />
+            <Legend verticalAlign="bottom" align="center" />
           </PieChart>
         </ResponsiveContainer>
       </div>
@@ -75,7 +75,7 @@ const renderCustomizedLabel = ({
   percent,
 }: CustomizedLabelProps) => {
   if (percent < 0.05) return null;
-  
+
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
