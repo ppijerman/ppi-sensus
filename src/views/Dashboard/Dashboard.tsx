@@ -8,6 +8,7 @@ import { FederalStateContext } from "./FederalStateContext";
 import { GeoVis } from "./Geovis";
 import { PPICabangGraph } from "./PPICabangGraph";
 import { UserStatistics } from "./Statistics";
+import { StatsMahasiswa } from "./StatsMahasiswa";
 
 export const Dashboard: NextPage = () => {
   const federalState = useContext(FederalStateContext);
@@ -25,11 +26,16 @@ export const Dashboard: NextPage = () => {
     { name: "Belum Terverifikasi", count: adminData?.unverified },
     { name: "Info belum lengkap", count: adminData?.updated },
   ];
-  const stats = [
-    { name: "Ausbildung / Vokasi", count: data?.vocation },
-    { name: "Bachelor / S1", count: data?.bachelor },
-    { name: "Master / S2", count: data?.master },
-    { name: "PhD / S3", count: data?.doctorand },
+
+  const statsDemografi = [
+    { name: "Jumlah Mahasiswa", count: adminData?.users },
+    { name: "Mahasiswa Terverifikasi", count: adminData?.verified },
+  ];
+  const statsMahasiswa = [
+    { name: "Ausbildung", count: data?.vocation },
+    { name: "Bachelor", count: data?.bachelor },
+    { name: "Master", count: data?.master },
+    { name: "PhD", count: data?.doctorand },
     { name: "Profesor", count: data?.professor },
   ];
 
@@ -62,6 +68,18 @@ export const Dashboard: NextPage = () => {
                   <UserStatistics stats={statsAdmin} />
                 </Card>
               </Protected>
+
+              <Card className="basis-full">
+                <UserStatistics stats={statsDemografi} />
+              </Card>
+              <Card className="basis-full md:basis-[300px]">
+                <StatsMahasiswa stats={statsMahasiswa} />
+              </Card>
+              {!federalState && (
+                <Card className="basis-full md:basis-[calc(100%-320px)]">
+                  <PPICabangGraph ppiCabangStats={ppiCabangStats} />
+                </Card>
+              )}
               <Card className="flex basis-full md:basis-[300px]">
                 <div className="h-[300px] w-full">
                   <ResponsiveContainer>
@@ -82,14 +100,6 @@ export const Dashboard: NextPage = () => {
                   </ResponsiveContainer>
                 </div>
               </Card>
-              <Card className="basis-full md:basis-[calc(100%-320px)]">
-                <UserStatistics stats={stats} />
-              </Card>
-              {!federalState && (
-                <Card className="basis-full">
-                  <PPICabangGraph ppiCabangStats={ppiCabangStats} />
-                </Card>
-              )}
             </div>
             <Card className="flex flex-col items-center 2xl:basis-1/3">
               <h1 className="mb-5 text-2xl font-semibold">
