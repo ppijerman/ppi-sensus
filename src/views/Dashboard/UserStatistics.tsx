@@ -1,17 +1,17 @@
 import CountUp from "react-countup";
 
-type StatisticOutput = {
+type UserStatisticType = {
   stats: {
     name: string;
-    count: number | undefined;
+    value: number | undefined;
   }[];
 };
 
-export const UserStatistics: React.FC<StatisticOutput> = ({
+export const UserStatistics: React.FC<UserStatisticType> = ({
   stats,
-}: StatisticOutput) => {
+}: UserStatisticType) => {
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className=" grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {stats.map((stat) => (
         <div
           key={stat.name}
@@ -19,7 +19,7 @@ export const UserStatistics: React.FC<StatisticOutput> = ({
         >
           <div className="text-xl font-bold">{stat.name}</div>
           <div className="text-4xl font-bold">
-            <CountUp end={stat.count ?? 0} duration={2} />
+            <CountUp end={stat.value ?? 0} duration={2} />
           </div>
         </div>
       ))}
