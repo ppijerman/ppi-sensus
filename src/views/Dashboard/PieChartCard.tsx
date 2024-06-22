@@ -4,9 +4,9 @@ import { Card } from "../../Components";
 export type PieChartCardType = {
   graphStats: { name: string; value?: number; fill?: string }[];
 };
-const DEFAULT_COLOR = ["#3399FF", "#009900", "#CC0000", "#7F00FF"];
+const DEFAULT_COLOR = ["#3399FF", "#CC0000", "#888888"];
 export const PieChartCard: FC<PieChartCardType> = ({ graphStats }) => (
-  <Card className="flex h-[350px] flex-[100%] lg:flex-[48%] 2xl:flex-[32%]">
+  <Card className="2xl: flex h-[350px] flex-[100%] lg:flex-[48%] 2xl:flex-[32%]">
     <div className="w-full">
       <ResponsiveContainer>
         <PieChart>

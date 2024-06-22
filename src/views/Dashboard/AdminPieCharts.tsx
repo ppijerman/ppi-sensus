@@ -10,6 +10,11 @@ export const AdminPieCharts = () => {
     { name: "Incomplete", value: adminData?.updated },
   ];
 
+  const subscribedGraph = [
+    { name: "Subscribed", value: adminData?.subscribed },
+    { name: "Unsubscribed", value: adminData?.unsubscribed },
+  ];
+
   const rolesGraph = [
     { name: "Admins", value: adminData?.admins },
     {
@@ -25,11 +30,21 @@ export const AdminPieCharts = () => {
       value: adminData?.inactive,
     },
   ];
+
+  const thirdPartyGraph = [
+    { name: "Third Party Consent", value: adminData?.thirdPartyConsent },
+    {
+      name: "No Third Party Consent",
+      value: adminData?.noThirdPartyConsent,
+    },
+  ];
   return (
     <>
       <PieChartCard graphStats={verifiedGraph} />
       <PieChartCard graphStats={rolesGraph} />
       <PieChartCard graphStats={activeGraph} />
+      <PieChartCard graphStats={subscribedGraph} />
+      <PieChartCard graphStats={thirdPartyGraph} />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { Card } from "../../Components";
 import { AdminPieCharts } from "./AdminPieCharts";
-import { LineChartCard } from "./LineChartCard";
+import { FullCharts } from "./FullCharts";
 import { UserStatistics } from "./UserStatistics";
 import { useGetAdminStats } from "./useGetAdminStats";
 
@@ -24,7 +24,7 @@ export const AdminStatistics: FC = () => {
             <UserStatistics stats={verifyStatistics} />
           </Card>
           <AdminPieCharts />
-          <LineChartCard />
+          <FullCharts />
         </div>
       </div>
     </>

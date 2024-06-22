@@ -49,7 +49,10 @@ export const Dashboard: NextPage = () => {
         </Protected>
         <Protected redirectTo="/">
           <div className="mt-4 flex w-full flex-col gap-10 2xl:flex-row">
-            <div className="flex flex-row flex-wrap gap-10 2xl:basis-[55%]">
+            <div className="flex flex-row flex-wrap gap-5 2xl:basis-[55%]">
+              <Card className="w-full">
+                <UserStatistics stats={educationStats} />
+              </Card>
               <PieChartCard graphStats={genderGraphStats} />
 
               {!federalState && (
@@ -57,9 +60,6 @@ export const Dashboard: NextPage = () => {
                   <PPICabangGraph ppiCabangStats={ppiCabangStats} />
                 </Card>
               )}
-              <Card className="flex-1 md:basis-[calc(100%-320px)]">
-                <UserStatistics stats={educationStats} />
-              </Card>
             </div>
             <Card className="flex flex-col items-center 2xl:basis-[45%]">
               <h1 className="mb-5 text-2xl font-semibold">
