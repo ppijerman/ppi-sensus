@@ -17,7 +17,16 @@ export const LineChartCard: FC<{
   axisKey: string;
   desc: string;
   strokes: string[];
-}> = ({ title = "Mahasiswa", data, dataKeys, axisKey, strokes, desc }) => (
+  lineNames: string[];
+}> = ({
+  title = "Mahasiswa",
+  data,
+  dataKeys,
+  axisKey,
+  strokes,
+  desc,
+  lineNames,
+}) => (
   <Card className="w-full ">
     <div className="flex flex-1 flex-col">
       <div className="mb-8 flex flex-col gap-1">
@@ -28,7 +37,13 @@ export const LineChartCard: FC<{
         <ResponsiveContainer>
           <LineChart data={data}>
             {dataKeys.map((k, i) => (
-              <Line type="monotone" dataKey={k} key={k} stroke={strokes[i]} />
+              <Line
+                type="monotone"
+                dataKey={k}
+                key={k}
+                stroke={strokes[i]}
+                name={lineNames[i]}
+              />
             ))}
             <XAxis dataKey={axisKey} />
             <YAxis />

@@ -65,6 +65,7 @@ export const FullCharts: FC = () => {
         title="Akun"
         data={usersBehavior}
         dataKeys={["createdAt", "updatedAt"]}
+        lineNames={["Pembuatan Akun", "Perubahan Akun"]}
         axisKey={"month"}
         strokes={["#82b89d", "#8884d8"]}
         desc={"Frekuensi perubahan dan pembuatan akun baru"}
