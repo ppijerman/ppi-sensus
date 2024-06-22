@@ -2,7 +2,7 @@ import { differenceInYears, format } from "date-fns";
 import type { FC } from "react";
 
 import { BarChartCard } from "./BarChartCard";
-import { LineChartCard } from "./LineChartCard.1";
+import { LineChartCard } from "./LineChartCard";
 import {
   monthDateFormat,
   showStatisticsInMonths,
