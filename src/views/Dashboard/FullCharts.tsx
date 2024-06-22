@@ -46,7 +46,7 @@ export const FullCharts: FC = () => {
 
   const userYearOfBirth = birthYears
     .map((year, i) => ({
-      age: differenceInYears(new Date(), new Date(year)) + " y.o",
+      age: differenceInYears(new Date(), new Date(year)),
       count: birthDateCounts[i],
     }))
     .reverse()
