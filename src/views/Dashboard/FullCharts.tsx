@@ -34,7 +34,7 @@ export const FullCharts: FC = () => {
     Map.groupBy(birthdays, (d) => format(d as Date, yearDateFormat)),
   );
   const [monthsForward, expectedGraduationCount] = showStatisticsInMonths(
-    -24,
+    -48,
     Map.groupBy(expectedGraduation, (d) => format(d as Date, monthDateFormat)),
   );
 
@@ -62,20 +62,21 @@ export const FullCharts: FC = () => {
   return (
     <>
       <LineChartCard
-        title="User Creation and Update"
+        title="Akun"
         data={usersBehavior}
         dataKeys={["createdAt", "updatedAt"]}
         axisKey={"month"}
         strokes={["#82b89d", "#8884d8"]}
+        desc={"Frekuensi perubahan dan pembuatan akun baru"}
       />
 
       <BarChartCard
-        title="Age Distribution"
+        desc="Menurut umurnya"
         data={userYearOfBirth}
         dataKeyAxis={"age"}
       />
       <BarChartCard
-        title="Graduation Date Distribution"
+        desc="Menurut perkiraan lulusnya"
         data={expectedGraduationYear}
         dataKeyAxis={"month"}
       />

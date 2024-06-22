@@ -1,11 +1,11 @@
 import { useContext, useMemo } from "react";
 import { Card } from "../../Components";
 import { trpc } from "../../utils/trpc";
-import { BarChartCard } from "./BarChartCard";
 import { FederalStateContext } from "./FederalStateContext";
 import { GeoVis } from "./Geovis";
 import { PPICabangGraph } from "./PPICabangGraph";
 import { PieChartCard } from "./PieChartCard";
+import { StatsMahasiswa } from "./StatsMahasiswa";
 import { UserStatistics } from "./UserStatistics";
 
 export const UserDashboard = () => {
@@ -16,11 +16,11 @@ export const UserDashboard = () => {
 
   const { data: ppiCabangStats } = trpc.internal.getPPICabangStats.useQuery();
 
-  const educationStats = [
+  const statsMahasiswa = [
     { name: "Ausbildung", value: data?.vocation },
-    { name: "Bachelor (S1)", value: data?.bachelor },
-    { name: "Master (S2)", value: data?.master },
-    { name: "PhD (S3)", value: data?.doctorand },
+    { name: "Bachelor", value: data?.bachelor },
+    { name: "Master", value: data?.master },
+    { name: "PhD", value: data?.doctorand },
     { name: "Profesor", value: data?.professor },
   ];
 
@@ -36,13 +36,15 @@ export const UserDashboard = () => {
     <div className="mt-4 flex w-full flex-col gap-5 2xl:flex-row">
       <div className="flex flex-row flex-wrap gap-5 2xl:basis-[55%]">
         <Card className="w-full">
-          <UserStatistics stats={educationStats} />
+          <UserStatistics stats={statsMahasiswa} />
         </Card>
-        <PieChartCard graphStats={genderGraphStats} />
-        <BarChartCard
-          data={educationStats}
-          dataKeyAxis={"name"}
-          dataKey={"value"}
+        <Card className="basis-full md:basis-[300px]">
+          <StatsMahasiswa stats={statsMahasiswa} />
+        </Card>
+        <PieChartCard
+          graphStats={genderGraphStats}
+          title={"Mahasiswa"}
+          desc={"Menurut Jenis Kelamin"}
         />
 
         {!federalState && (

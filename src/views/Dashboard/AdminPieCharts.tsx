@@ -5,46 +5,55 @@ export const AdminPieCharts = () => {
   const { adminData } = useGetAdminStats();
 
   const verifiedGraph = [
-    { name: "Verified", value: adminData?.verified },
-    { name: "Non-Verified", value: adminData?.unverified },
-    { name: "Incomplete", value: adminData?.updated },
+    { name: "Terverifikasi", value: adminData?.verified },
+    { name: "Belum terverifikasi", value: adminData?.unverified },
+    { name: "Data tidak lengkap", value: adminData?.updated },
   ];
 
   const subscribedGraph = [
-    { name: "Subscribed", value: adminData?.subscribed },
-    { name: "Unsubscribed", value: adminData?.unsubscribed },
+    { name: "Pelanggan", value: adminData?.subscribed },
+    { name: "Bukan Pelanggan", value: adminData?.unsubscribed },
   ];
 
   const rolesGraph = [
-    { name: "Admins", value: adminData?.admins },
+    { name: "Admin", value: adminData?.admins },
     {
-      name: "Users",
+      name: "Pengguna",
       value: (adminData?.users ?? 0) - (adminData?.admins ?? 0),
     },
   ];
 
   const activeGraph = [
-    { name: "Active", value: adminData?.active },
+    { name: "Aktif", value: adminData?.active },
     {
-      name: "Inactive",
+      name: "Tidak aktif",
       value: adminData?.inactive,
     },
   ];
 
   const thirdPartyGraph = [
-    { name: "Third Party Consent", value: adminData?.thirdPartyConsent },
+    { name: "Boleh", value: adminData?.thirdPartyConsent },
     {
-      name: "No Third Party Consent",
+      name: "Tidak boleh",
       value: adminData?.noThirdPartyConsent,
     },
   ];
   return (
     <>
-      <PieChartCard graphStats={verifiedGraph} />
-      <PieChartCard graphStats={rolesGraph} />
-      <PieChartCard graphStats={activeGraph} />
-      <PieChartCard graphStats={subscribedGraph} />
-      <PieChartCard graphStats={thirdPartyGraph} />
+      <PieChartCard
+        graphStats={verifiedGraph}
+        desc={"Menurut status verifikasinya"}
+      />
+      <PieChartCard graphStats={rolesGraph} desc={"Menurut perannya"} />
+      <PieChartCard graphStats={activeGraph} desc={"Menurut keaktifannya"} />
+      <PieChartCard
+        graphStats={subscribedGraph}
+        desc={"Menurut penyetelan pelangganan"}
+      />
+      <PieChartCard
+        graphStats={thirdPartyGraph}
+        desc={"Menurut izin pemberian datanya kepada pihak ketiga"}
+      />
     </>
   );
 };

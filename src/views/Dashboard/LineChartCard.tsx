@@ -11,26 +11,32 @@ import {
 import { Card } from "../../Components";
 
 export const LineChartCard: FC<{
-  title: string;
+  title?: string;
   data: unknown[];
   dataKeys: string[];
   axisKey: string;
+  desc: string;
   strokes: string[];
-}> = ({ title, data, dataKeys, axisKey, strokes }) => (
+}> = ({ title = "Mahasiswa", data, dataKeys, axisKey, strokes, desc }) => (
   <Card className="w-full ">
-    <p className="mb-5">{title}</p>
-    <div className="h-[400px] w-full ">
-      <ResponsiveContainer>
-        <LineChart data={data}>
-          {dataKeys.map((k, i) => (
-            <Line type="monotone" dataKey={k} key={k} stroke={strokes[i]} />
-          ))}
-          <XAxis dataKey={axisKey} />
-          <YAxis />
-          <Tooltip />
-          <Legend align="center" verticalAlign="bottom" />
-        </LineChart>
-      </ResponsiveContainer>
+    <div className="flex flex-1 flex-col">
+      <div className="mb-8 flex flex-col gap-1">
+        <h1 className="text-2xl font-bold">{title}</h1>
+        <p className="text-gray-500">{desc}</p>
+      </div>
+      <div className="h-[300px] w-full ">
+        <ResponsiveContainer>
+          <LineChart data={data}>
+            {dataKeys.map((k, i) => (
+              <Line type="monotone" dataKey={k} key={k} stroke={strokes[i]} />
+            ))}
+            <XAxis dataKey={axisKey} />
+            <YAxis />
+            <Tooltip />
+            <Legend align="center" verticalAlign="bottom" />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   </Card>
 );
