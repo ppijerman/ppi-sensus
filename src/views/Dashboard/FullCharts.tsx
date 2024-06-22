@@ -1,17 +1,8 @@
 import { differenceInYears, format } from "date-fns";
 import type { FC } from "react";
-import {
-  Legend,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
-import { Card } from "../../Components";
 
 import { BarChartCard } from "./BarChartCard";
+import { LineChartCard } from "./LineChartCard.1";
 import {
   monthDateFormat,
   showStatisticsInMonths,
@@ -70,20 +61,24 @@ export const FullCharts: FC = () => {
 
   return (
     <>
-      <Card className="h-[400px] w-full ">
-        <ResponsiveContainer>
-          <LineChart data={usersBehavior}>
-            <Line type="monotone" dataKey="createdAt" stroke="#82b89d" />
-            <Line type="monotone" dataKey="updatedAt" stroke="#8884d8" />
-            <XAxis dataKey="month" />
-            <YAxis />
-            <Tooltip />
-            <Legend align="center" verticalAlign="bottom" />
-          </LineChart>
-        </ResponsiveContainer>
-      </Card>
-      <BarChartCard data={userYearOfBirth} dataKeyAxis={"age"} />
-      <BarChartCard data={expectedGraduationYear} dataKeyAxis={"month"} />
+      <LineChartCard
+        title="User Creation and Update"
+        data={usersBehavior}
+        dataKeys={["createdAt", "updatedAt"]}
+        axisKey={"month"}
+        strokes={["#82b89d", "#8884d8"]}
+      />
+
+      <BarChartCard
+        title="Age Distribution"
+        data={userYearOfBirth}
+        dataKeyAxis={"age"}
+      />
+      <BarChartCard
+        title="Graduation Date Distribution"
+        data={expectedGraduationYear}
+        dataKeyAxis={"month"}
+      />
     </>
   );
 };

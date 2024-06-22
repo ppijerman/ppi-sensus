@@ -54,8 +54,9 @@ export const LineChartCard: FC = () => {
     }))
     .reverse();
   return (
-    <>
-      <Card className="h-[400px] w-full ">
+    
+      <Card className="w-full">
+        <div className="w-full h-[400px]">
         <ResponsiveContainer>
           <LineChart data={usersBehavior}>
             <Line type="monotone" dataKey="createdAt" stroke="#82b89d" />
@@ -77,8 +78,10 @@ export const LineChartCard: FC = () => {
             <Tooltip />
           </BarChart>
         </ResponsiveContainer>
+        </div>
       </Card>
-    </>
+      
+    
   );
 };
 export const monthDateFormat = "MMMM y";
