@@ -28,6 +28,7 @@ export const getAdminStatistics = adminProcedure
     const admins = await prisma.user.count({
       where: { role: "ADMIN", bundesland },
     });
+
     const dates = await prisma.user.findMany({
       select: {
         birthDate: true,
@@ -35,18 +36,21 @@ export const getAdminStatistics = adminProcedure
         createdAt: true,
         expectedGraduation: true,
       },
+      where: {
+        bundesland,
+      },
     });
     const subscribed = await prisma.user.count({
-      where: { subscribeNewsletterEmail: true },
+      where: { subscribeNewsletterEmail: true, bundesland },
     });
     const unsubscribed = await prisma.user.count({
-      where: { subscribeNewsletterEmail: false },
+      where: { subscribeNewsletterEmail: false, bundesland },
     });
     const thirdPartyConsent = await prisma.user.count({
-      where: { forwardDataThirdParty: true },
+      where: { forwardDataThirdParty: true, bundesland },
     });
     const noThirdPartyConsent = await prisma.user.count({
-      where: { forwardDataThirdParty: false },
+      where: { forwardDataThirdParty: false, bundesland },
     });
 
     return {

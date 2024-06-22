@@ -25,15 +25,15 @@ export const UserDashboard = () => {
   ];
 
   const genderGraphStats = [
-    { name: "Laki-laki", value: data?.male, fill: "#0336FF" },
-    { name: "Perempuan", value: data?.female, fill: "#FF0266" },
+    { name: "Laki-laki", value: data?.male },
+    { name: "Perempuan", value: data?.female },
   ];
 
   useMemo(() => {
     return ppiCabangStats?.sort((a, b) => b.count - a.count);
   }, [ppiCabangStats]);
   return (
-    <div className="mt-4 flex w-full flex-col gap-10 2xl:flex-row">
+    <div className="mt-4 flex w-full flex-col gap-5 2xl:flex-row">
       <div className="flex flex-row flex-wrap gap-5 2xl:basis-[55%]">
         <Card className="w-full">
           <UserStatistics stats={educationStats} />
