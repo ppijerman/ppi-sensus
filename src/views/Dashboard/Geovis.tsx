@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
-import { GermanySVGPath } from "./GermanyPath";
-import { GermanyOutline } from "./GermanyOutline";
 import { AnimatePresence, motion } from "framer-motion";
-import { trpc } from "../../utils/trpc";
-import { BarChart, Bar, XAxis, YAxis, Legend } from "recharts";
 import { useRouter } from "next/router";
+import React, { useContext, useEffect, useState } from "react";
+import { Bar, BarChart, Legend, XAxis, YAxis } from "recharts";
+import { trpc } from "../../utils/trpc";
 import { FederalStateContext } from "./FederalStateContext";
+import { GermanyOutline } from "./GermanyOutline";
+import { GermanySVGPath } from "./GermanyPath";
 
 const xLabels = ["Ausbildung", "Bachelor", "Master", "Doctor", "Professor"];
 
@@ -54,18 +54,33 @@ export const GeoVis: React.FC<{ width: string }> = ({ width }) => {
         >
           <g>
             {GermanySVGPath.map((path, id) => (
-              <path
-                key={id}
-                id={path.id}
-                d={path.d}
-                className={`duration-3000 cursor-pointer ${bundesland === path.id ? "fill-green-400" : "fill-blue-400"} stroke-white stroke-[1px] transition hover:fill-red-200`}
-                onMouseOver={() => handleMouseOver(path.id)}
-                onClick={() =>
-                  bundesland === path.id
-                    ? router.push("/dashboard")
-                    : router.push(`/dashboard/${path.id}`)
-                }
-              />
+              <>
+                <g>
+                  <path
+                    key={id}
+                    id={path.id}
+                    d={path.d}
+                    className={`duration-3000 cursor-pointer ${bundesland === path.id ? "fill-green-400" : "fill-blue-400"} stroke-white stroke-[1px] transition hover:fill-red-200`}
+                    onMouseOver={() => handleMouseOver(path.id)}
+                    onClick={() =>
+                      bundesland === path.id
+                        ? router.push("/dashboard")
+                        : router.push(`/dashboard/${path.id}`)
+                    }
+                  />
+
+                  <text
+                    cx="50%" // Center horizontally
+                    cy="50%" // Center vertically
+                    textAnchor="middle" // Center the text
+                    dominantBaseline="middle" // Center the text
+                    fontSize="16" // Adjust font size as needed
+                    fill="white" // Text color
+                  >
+                    Your centered text
+                  </text>
+                </g>
+              </>
             ))}
           </g>
           <path id="path3789" d={GermanyOutline.d} className="fill-none" />

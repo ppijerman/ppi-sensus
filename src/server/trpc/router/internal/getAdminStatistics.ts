@@ -28,6 +28,9 @@ export const getAdminStatistics = adminProcedure
     const admins = await prisma.user.count({
       where: { role: "ADMIN", bundesland },
     });
+    const dates = await prisma.user.findMany({
+      select: { birthDate: true, updatedAt: true, createdAt: true },
+    });
 
     return {
       users,
@@ -38,5 +41,6 @@ export const getAdminStatistics = adminProcedure
       inactive,
       updated,
       admins,
+      dates,
     };
   });

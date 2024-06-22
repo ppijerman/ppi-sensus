@@ -4,16 +4,16 @@ import { Card } from "../../Components";
 export type PieChartCardType = {
   graphStats: { name: string; value?: number; fill?: string }[];
 };
-const DEFAULT_COLOR = "#0EA5E9";
+const DEFAULT_COLOR = ["#3399FF", "#009900", "#CC0000", "#7F00FF"];
 export const PieChartCard: FC<PieChartCardType> = ({ graphStats }) => (
   <Card className="flex h-[350px] flex-[100%] lg:flex-[48%] 2xl:flex-[32%]">
     <div className="w-full">
       <ResponsiveContainer>
         <PieChart>
           <Pie
-            data={graphStats.map((x) => ({
+            data={graphStats.map((x, i) => ({
               ...x,
-              fill: x.fill ?? DEFAULT_COLOR,
+              fill: x.fill ?? DEFAULT_COLOR[i % DEFAULT_COLOR.length],
             }))}
             dataKey="value"
             nameKey="name"
