@@ -1,16 +1,16 @@
 import {
-  PieChart,
-  Pie,
   Cell,
-  ResponsiveContainer,
   Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
   Tooltip,
 } from "recharts";
 
 type StatisticOutput = {
   stats: {
     name: string;
-    count: number | undefined;
+    value: number | undefined;
   }[];
 };
 
@@ -27,7 +27,7 @@ export const StatsMahasiswa: React.FC<StatisticOutput> = ({
         <h1 className="text-2xl font-bold">Mahasiswa</h1>
         <p className="text-gray-500">Perbandingan antar jenjang</p>
       </div>
-      <div className="w-full h-[300px]">
+      <div className="h-[300px] w-full">
         <ResponsiveContainer>
           <PieChart>
             <Pie
@@ -38,7 +38,7 @@ export const StatsMahasiswa: React.FC<StatisticOutput> = ({
               label={renderCustomizedLabel}
               outerRadius={100}
               fill="#8884d8"
-              dataKey="count"
+              dataKey="value"
             >
               {stats.map((entry, index) => (
                 <Cell

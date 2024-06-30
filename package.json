@@ -42,6 +42,7 @@
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "d3": "^7.9.0",
+    "date-fns": "^3.6.0",
     "evergreen-ui": "^7.1.9",
     "framer-motion": "^11.0.24",
     "geojson": "^0.5.0",

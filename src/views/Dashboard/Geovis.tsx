@@ -1,17 +1,15 @@
-import React, { useContext } from "react";
-import { GermanySVGPath } from "./GermanyPath";
-import { GermanyOutline } from "./GermanyOutline";
 import { useRouter } from "next/router";
+import React, { useContext } from "react";
 import { FederalStateContext } from "./FederalStateContext";
+import { GermanyOutline } from "./GermanyOutline";
+import { GermanySVGPath } from "./GermanyPath";
 
 export const GeoVis: React.FC<{ width: string }> = ({ width }) => {
   const bundesland = useContext(FederalStateContext);
   const router = useRouter();
 
   return (
-    <div
-      className="flex w-full flex-col items-center"
-    >
+    <div className="flex w-full flex-col items-center">
       <div className="max-w-[400px]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
