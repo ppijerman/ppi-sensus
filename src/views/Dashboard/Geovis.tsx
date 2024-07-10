@@ -26,7 +26,7 @@ export const GeoVis: FC<{ width: string }> = ({ width }) => {
       Math.floor(255 - (x[1] / maxStudentsPerState) * RANGE).toString(16),
     ]),
   );
-  console.log([...stateColorMap.keys()]);
+
   return (
     <div
       className={`flex h-full w-full max-w-[400px] flex-col items-center ${!!bundesland ? "justify-center" : "mt-10"}`}

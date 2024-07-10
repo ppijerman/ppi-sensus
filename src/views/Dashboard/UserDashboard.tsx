@@ -38,7 +38,7 @@ export const UserDashboard = () => {
         <Card className="w-full">
           <UserStatistics stats={statsMahasiswa} />
         </Card>
-        <Card className="basis-full md:basis-[300px]">
+        <Card className="basis-full lg:basis-[300px]">
           <StatsMahasiswa stats={statsMahasiswa} />
         </Card>
         <PieChartCard
