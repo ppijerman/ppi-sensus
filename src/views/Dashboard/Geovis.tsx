@@ -1,6 +1,7 @@
 import { trpc } from "@/utils/trpc";
 import { useRouter } from "next/router";
-import { FC, useContext } from "react";
+import type { FC } from "react";
+import { useContext } from "react";
 import { FederalStateContext } from "./FederalStateContext";
 import styles from "./Geovis.module.css";
 import { GermanyOutline } from "./GermanyOutline";
