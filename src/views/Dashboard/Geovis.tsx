@@ -5,6 +5,8 @@ import { FederalStateContext } from "./FederalStateContext";
 import styles from "./Geovis.module.css";
 import { GermanyOutline } from "./GermanyOutline";
 import { GermanySVGPath } from "./GermanyPath";
+
+const RANGE = 150;
 export const GeoVis: FC<{ width: string }> = ({ width }) => {
   const bundesland = useContext(FederalStateContext);
   const router = useRouter();
@@ -21,7 +23,7 @@ export const GeoVis: FC<{ width: string }> = ({ width }) => {
   const stateColorMap = new Map(
     studentsPerStateCount?.map((x) => [
       x[0],
-      Math.floor(255 - (x[1] / maxStudentsPerState) * 150).toString(16),
+      Math.floor(255 - (x[1] / maxStudentsPerState) * RANGE).toString(16),
     ]),
   );
   console.log([...stateColorMap.keys()]);
@@ -64,36 +66,24 @@ export const GeoVis: FC<{ width: string }> = ({ width }) => {
           className=" fill-none stroke-slate-400"
         />
       </svg>
-
-      {/* <div className="flex flex-col justify-center py-5">
-        <AnimatePresence>
-          {hoveredBundesland && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="pointer-events-none mt-5 flex flex-col items-center justify-center rounded-md bg-white shadow-md"
-            >
-              <h1 className="text-xl font-semibold">{hoveredBundesland}</h1>
-              <BarChart
-                data={tooltip.data}
-                width={525}
-                height={300}
-                margin={{ left: 20, right: 20, top: 5, bottom: 5 }}
-                barGap={2}
-                barCategoryGap={1}
-                barSize={40}
-              >
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Legend />
-                <Bar dataKey="value" fill="#8CB9BD" legendType="none" />
-              </BarChart>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div> */}
+      <div className="mt-20 grid w-full grid-cols-8">
+        <>
+          {Array(8)
+            .fill(undefined)
+            .map((_, i) => (
+              <div
+                className="flex h-5 w-full items-center justify-center text-center"
+                style={{
+                  backgroundColor: `#33${Math.floor(255 - (i / 8) * RANGE).toString(16)}55`,
+                }}
+              />
+            ))}
+        </>
+        <div className="col-span-8 flex items-center justify-between">
+          <span>0</span>
+          <span>{maxStudentsPerState}</span>
+        </div>
+      </div>
     </div>
   );
 };
