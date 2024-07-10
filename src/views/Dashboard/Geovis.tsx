@@ -72,6 +72,7 @@ export const GeoVis: FC<{ width: string }> = ({ width }) => {
             .fill(undefined)
             .map((_, i) => (
               <div
+                key={i}
                 className="flex h-5 w-full items-center justify-center text-center"
                 style={{
                   backgroundColor: `#33${Math.floor(255 - (i / 8) * RANGE).toString(16)}55`,
