@@ -12,7 +12,7 @@ export const PieChartCard: FC<PieChartCardType> = ({
   title = "Mahasiswa",
   desc,
 }) => (
-  <Card className="2xl: flex flex-[100%] lg:flex-[48%] 2xl:flex-[32%]">
+  <Card className="flex flex-[100%] lg:flex-[48%] 2xl:flex-[32%]">
     <div className="flex flex-1 flex-col">
       <div className="mb-8 flex flex-col gap-1">
         <h1 className="text-2xl font-bold">{title}</h1>

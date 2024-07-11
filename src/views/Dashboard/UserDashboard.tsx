@@ -38,7 +38,7 @@ export const UserDashboard = () => {
         <Card className="w-full">
           <UserStatistics stats={statsMahasiswa} />
         </Card>
-        <Card className="basis-full md:basis-[300px]">
+        <Card className="basis-full lg:basis-[300px]">
           <StatsMahasiswa stats={statsMahasiswa} />
         </Card>
         <PieChartCard
@@ -54,7 +54,7 @@ export const UserDashboard = () => {
         )}
       </div>
       <Card className="flex flex-col items-center 2xl:basis-[45%]">
-        <h1 className="mb-5 text-2xl font-semibold">
+        <h1 className=" py-3 text-2xl font-semibold">
           {federalState ?? "Demografi Mahasiswa Indonesia di Jerman"}
         </h1>
         <GeoVis width="100%" />
